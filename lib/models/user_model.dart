@@ -14,11 +14,12 @@ class UserModel {
   });
 
   factory UserModel.fromRawJson(String str) =>
-      UserModel.fromJson(json.decode(str));
+      UserModel.fromJson(json.decode(str), json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromJson(Map<String, dynamic> json, Object object) =>
+      UserModel(
         succeeded: json["succeeded"],
         message: json["message"],
         errors: json["errors"],

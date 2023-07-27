@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/models/user_model.dart';
+import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,11 +12,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _email = '';
-  String _password = '';
+  String _email = 'mehmetkmobil@gmail.com';
+  String _password = '320732';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
+    login(email: _email, password: _password, context: context);
     if (_formKey.currentState!.validate()) {
       if (_email == 'admin' && _password == 'password') {
         // Login logic
@@ -65,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder()),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your username';
+                        return 'Please enter your email';
                       }
                       return null;
                     },
@@ -109,5 +112,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void login() {}
+  FutureBuilder<UserModel> login(
+      {required String email,
+      required String password,
+      required BuildContext context}) {
+    return FutureBuilder<UserModel>(
+      future: AuthenticateService().login(email, password),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.user!.email!);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        return const CircularProgressIndicator();
+      },
+    );
+  }
 }
