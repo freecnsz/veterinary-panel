@@ -6,17 +6,17 @@ class LoginPage extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
-  static const String routeName = '/login';
+  static const String routeName = '/';
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _username = '';
+  String _email = '';
   String _password = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      if (_username == 'admin' && _password == 'password') {
+      if (_email == 'admin' && _password == 'password') {
         // Login logic
         print('Login successful');
         // Example: Navigator.pushReplacementNamed(context, '/admin_panel');
@@ -51,13 +51,18 @@ class _LoginPageState extends State<LoginPage> {
                   Text("Please login to continue",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline6),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
+                  Divider(
+                    color: Colors.grey[600],
+                    indent: 30,
+                    endIndent: 30,
+                  ),
+                  const SizedBox(height: 20),
                   TextFormField(
                     decoration: const InputDecoration(
-                      labelText: 'Username',
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
-                    ),
+                        labelText: 'Email',
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder()),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your username';
@@ -66,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     onChanged: (value) {
                       setState(() {
-                        _username = value;
+                        _email = value;
                       });
                     },
                   ),
@@ -103,4 +108,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  void login() {}
 }
