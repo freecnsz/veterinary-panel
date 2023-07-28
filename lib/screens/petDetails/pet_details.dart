@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:js_util';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/models/pet_growth_model.dart';
 import 'package:flutter_boilerplate/models/pet_model.dart';
+import 'package:flutter_boilerplate/services/pet_growth_service.dart';
 import 'package:intl/intl.dart';
 import '../../services/pet_details_service.dart';
 
@@ -21,6 +24,16 @@ gender
 petimage
 */
 class _PetDetailsState extends State<PetDetails> {
+  late Future<GrowthModel> growth;
+  late Future<PetModel> pet;
+
+  @override
+  void initState() {
+    growth = GrowthService().getEn(widget.id);
+    pet = PetService().getPetDetails(widget.id);
+    super.initState();
+  }
+
   var image = "";
   @override
   Widget build(BuildContext context) {
@@ -31,11 +44,12 @@ class _PetDetailsState extends State<PetDetails> {
       body: Padding(
         padding: const EdgeInsets.all(48.0),
         child: FutureBuilder<PetModel>(
-          future: PetService().getPetDetails(widget.id),
+          future: pet,
           builder: (context, snapshot) {
             if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
               var inputFormat = DateFormat('dd/MM/yyyy');
+              // ignore: prefer_typing_uninitialized_variables
               var pic;
               snapshot.data!.data!.petImage != null
                   ? pic = snapshot.data!.data!.petImage
@@ -238,7 +252,41 @@ class _PetDetailsState extends State<PetDetails> {
                           ),
                         ],
                       ),
-                      const ExpansionTiles(),
+                      ExpansionTile(
+                        title: const Text("Detaylar"),
+                        children: [
+                          Column(
+                            children: [
+                              FutureBuilder<GrowthModel>(
+                                future: growth,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData &&
+                                      snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                    return Card();
+                                  } else {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  }
+                                },
+                              ),
+                              FutureBuilder<GrowthModel>(
+                                future: growth,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData &&
+                                      snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                    return Card();
+                                  } else {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  }
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                       const SizedBox(
                         height: 20,
                       )
@@ -252,38 +300,6 @@ class _PetDetailsState extends State<PetDetails> {
           },
         ),
       ),
-    );
-  }
-}
-
-class ExpansionTiles extends StatefulWidget {
-  const ExpansionTiles({super.key});
-
-  @override
-  State<ExpansionTiles> createState() => _ExpansionTilesState();
-}
-
-class _ExpansionTilesState extends State<ExpansionTiles> {
-  @override
-  Widget build(BuildContext context) {
-    return const ExpansionTile(
-      title: Text("Detaylar"),
-      children: [
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-        Text("Detaylar"),
-      ],
     );
   }
 }
