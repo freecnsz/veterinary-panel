@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/models/all_pets_model.dart';
+import 'package:flutter_boilerplate/models/pet_model.dart';
 import 'package:intl/intl.dart';
 import '../../services/pet_service.dart';
 
