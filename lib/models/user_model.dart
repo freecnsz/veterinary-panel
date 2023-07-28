@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// base model for json that returns an objects
 class UserModel {
   bool? succeeded;
   String? message;
@@ -34,6 +35,7 @@ class UserModel {
       };
 }
 
+// user model for base model that contains the user data
 class User {
   String? id;
   String? userName;

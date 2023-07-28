@@ -11,6 +11,7 @@ class AuthenticateService {
         APIUrls.authentication,
       );
 
+      // Await the http get response, then decode the json-formatted response.
       var response = await http.post(url,
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
@@ -20,8 +21,7 @@ class AuthenticateService {
             "password": password,
           }));
 
-      print(response.body);
-
+      // Check if the response is 200 and return the user
       if (response.statusCode == 200) {
         var user = UserModel.fromRawJson(response.body);
         return user;

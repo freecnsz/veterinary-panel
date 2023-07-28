@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/SharedPreferences/shared_preferences.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
 import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
 
@@ -14,7 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
-  bool staySigenedIn = false;
+  bool rememberMe = false;
   bool passwordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -103,12 +104,13 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text("Remember me"),
+                      // checkbox to remember the user
                       Checkbox(
-                          value: staySigenedIn,
+                          value: rememberMe,
                           fillColor: MaterialStateProperty.all(Colors.blue),
                           onChanged: (bool? value) {
                             setState(() {
-                              staySigenedIn = value ?? false;
+                              rememberMe = value ?? false;
                             });
                           }),
                     ],
@@ -131,15 +133,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Function to login
   void login() async {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) {
+        // handle the states of login process
         return FutureBuilder(
             future: AuthenticateService().login(_email, _password),
             builder: (context, AsyncSnapshot<UserModel> snap) {
               if (snap.hasData && snap.data!.succeeded!) {
+                // call the function to save the token to local memory if the user wants to stay signed in
+                if (rememberMe) {
+                  SPService().saveTokenToMemory(snap.data!.user!.jwToken!);
+                }
+
                 return SimpleDialog(
                   title: const Center(child: Text("Succesfully logged in!")),
                   children: [
