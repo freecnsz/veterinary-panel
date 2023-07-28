@@ -36,7 +36,10 @@ class _PetDetailsState extends State<PetDetails> {
             if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
               var inputFormat = DateFormat('dd/MM/yyyy');
-              var pic = snapshot.data!.data!.petImage;
+              var pic;
+              snapshot.data!.data!.petImage != null
+                  ? pic = snapshot.data!.data!.petImage
+                  : pic = "";
               var photo = base64Decode(pic);
               return Card(
                 color: Colors.grey.shade200,
