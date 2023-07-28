@@ -20,6 +20,8 @@ class AuthenticateService {
             "password": password,
           }));
 
+      print(response.body);
+
       if (response.statusCode == 200) {
         var user = UserModel.fromRawJson(response.body);
         return user;

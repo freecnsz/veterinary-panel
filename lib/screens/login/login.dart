@@ -16,18 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   String _password = '320732';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _submitForm() {
-    login(email: _email, password: _password, context: context);
-    if (_formKey.currentState!.validate()) {
-      if (_email == 'admin' && _password == 'password') {
-        // Login logic
-        print('Login successful');
-        // Example: Navigator.pushReplacementNamed(context, '/admin_panel');
-      } else {
-        print('Login failed');
-      }
-    }
-  }
+  void _submitForm() {}
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
                       }
+
                       return null;
                     },
                     onChanged: (value) {
@@ -100,7 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   ElevatedButton(
-                    onPressed: _submitForm,
+                    onPressed: () {
+                      login(
+                          email: _email, password: _password, context: context);
+                    },
                     child: const Text('Login'),
                   ),
                 ],
