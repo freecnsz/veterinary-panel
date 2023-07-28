@@ -12,11 +12,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _email = 'mehmetkmobil@gmail.com';
-  String _password = '320732';
+  String _email = '';
+  String _password = '';
+  bool staySigenedIn = false;
+  bool passwordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void _submitForm() {}
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +69,26 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    obscureText: passwordVisible,
+                    decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.lock),
+                      border: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                        icon: Icon(passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
                       }
-
                       return null;
                     },
                     onChanged: (value) {
@@ -88,11 +97,28 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text("Remember me"),
+                      Checkbox(
+                          value: staySigenedIn,
+                          fillColor: MaterialStateProperty.all(Colors.blue),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              staySigenedIn = value ?? false;
+                            });
+                          }),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   ElevatedButton(
                     onPressed: () {
-                      login(
-                          email: _email, password: _password, context: context);
+                      if (_formKey.currentState!.validate()) {
+                        login();
+                      }
                     },
                     child: const Text('Login'),
                   ),
@@ -105,19 +131,84 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  FutureBuilder<UserModel> login(
-      {required String email,
-      required String password,
-      required BuildContext context}) {
-    return FutureBuilder<UserModel>(
-      future: AuthenticateService().login(email, password),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(snapshot.data!.user!.email!);
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-        return const CircularProgressIndicator();
+  void login() async {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return FutureBuilder(
+            future: AuthenticateService().login(_email, _password),
+            builder: (context, AsyncSnapshot<UserModel> snap) {
+              if (snap.hasData && snap.data!.succeeded!) {
+                return SimpleDialog(
+                  title: const Center(child: Text("Succesfully logged in!")),
+                  children: [
+                    SizedBox(
+                      width: 20,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text("Ok"),
+                      ),
+                    ),
+                  ],
+                );
+              } else if (snap.hasData && !snap.data!.succeeded!) {
+                return Center(
+                  child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: SimpleDialog(
+                      shape: ShapeBorder.lerp(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        1,
+                      ),
+                      title: const Text("Login failed!"),
+                      children: [
+                        SizedBox(
+                          height: 100,
+                          width: 150,
+                          child: Column(
+                            children: [
+                              Text("Error: ${snap.data!.message}"),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("Ok"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else if (snap.hasError) {
+                return SimpleDialog(
+                  title: const Text("There is an issue with connection!"),
+                  children: [
+                    Text("Error: ${snap.error.toString()}"),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Ok"),
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            });
       },
     );
   }
