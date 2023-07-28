@@ -139,7 +139,7 @@ class _PetDetailsState extends State<PetDetails> {
                           verticalDirection: VerticalDirection.down,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Birth Date: "),
+                            const Text("Doğum Tarihi: "),
                             const SizedBox(
                               width: 50,
                             ),
@@ -164,21 +164,21 @@ class _PetDetailsState extends State<PetDetails> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Text("Breed Type"),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Text(snapshot.data!.data!.breedName.toString()),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                const Text("Pet Type"),
+                                const Text("Hayvan Türü"),
                                 const SizedBox(
                                   height: 20,
                                 ),
                                 Text(snapshot.data!.data!.petTypeName
                                     .toString()),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text("Cins Türü"),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(snapshot.data!.data!.breedName.toString()),
                               ],
                             ),
                           ],
