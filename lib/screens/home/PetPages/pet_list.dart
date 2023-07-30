@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/components/drawer/drawer.dart';
+import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
 
 class AllPetsPage extends StatefulWidget {
   const AllPetsPage({super.key});
+  static const String routeName = '/AllPetsPage';
 
   @override
   State<StatefulWidget> createState() => AllPetsPageState();
@@ -56,15 +57,21 @@ class AllPetsPageState extends State<AllPetsPage> {
                           : Colors.orange,
                     ),
                     // ignore: prefer_interpolation_to_compose_strings
-                    title: Text(snapshot.data!.data![index].name.toString()),
+                    title: Text(
+                      snapshot.data!.data![index].name.toString(),
+                      style: const TextStyle(color: Colors.black),
+                    ),
                     tileColor: index.isOdd ? oddItemColor : evenItemColor,
-                    subtitle:
-                        Text(snapshot.data!.data![index].status.toString()),
+                    subtitle: Text(
+                        snapshot.data!.data![index].status.toString(),
+                        style: const TextStyle(color: Colors.black)),
                     trailing: IconButton(
-                        onPressed: () {
-                          //infoya gidicek
-                        },
-                        icon: const Icon(Icons.arrow_forward_ios)),
+                      onPressed: () {
+                        //infoya gidicek
+                      },
+                      icon: const Icon(Icons.arrow_forward_ios),
+                      color: Colors.black,
+                    ),
                   ),
                 );
               },

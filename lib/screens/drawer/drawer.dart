@@ -17,8 +17,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage("assets/images/logo.png"),
+            ),
             Text(
-              "Şirket Logosu",
+              "E-Paw",
               style: TextStyle(fontSize: 20),
             ),
           ],
