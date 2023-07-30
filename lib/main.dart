@@ -1,7 +1,29 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'constants.dart';
+import 'screens/dashboard/dasboard.dart';
+import 'services/product_service/providers/product_provider.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+  };
+  runApp(const MyApp());
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,20 +32,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Material App',
-        home: PetDetails(
-          id: "81",
-        ));
+        title: 'Flutter Demo',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: bgColor,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: Colors.white),
+          canvasColor: secondaryColor,
+        ),
+        initialRoute: Dashboard.routeName,
+        routes: {
+          Dashboard.routeName: (context) => const Dashboard(),
+        },
+      ),
+    );
+
   }
 }
-
-/*
-1
-75
-78
-80
-81
-77
-89
-79
-*/
