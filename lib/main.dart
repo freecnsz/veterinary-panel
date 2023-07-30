@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
+import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants.dart';
-import 'screens/dashboard/dasboard.dart';
+import 'screens/home/home_page.dart';
+
 import 'services/product_service/providers/product_provider.dart';
 
 void main() {
@@ -40,9 +41,12 @@ class MyApp extends StatelessWidget {
               .apply(bodyColor: Colors.white),
           canvasColor: secondaryColor,
         ),
-        initialRoute: Dashboard.routeName,
+        initialRoute: LoginPage.routeName,
         routes: {
-          Dashboard.routeName: (context) => const Dashboard(),
+          MyHomePage.routeName: (context) =>
+              const MyHomePage(title: 'Flutter Demo Home Page'),
+          LoginPage.routeName: (context) => const LoginPage(),
+
         },
       ),
     );
