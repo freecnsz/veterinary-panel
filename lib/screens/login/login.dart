@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/home/home_page.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
 import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
@@ -149,20 +150,35 @@ class _LoginPageState extends State<LoginPage> {
                   SPService().saveTokenToMemory(snap.data!.user!.jwToken!);
                 }
 
-                return SimpleDialog(
-                  title: const Center(child: Text("Succesfully logged in!")),
-                  children: [
-                    SizedBox(
-                      width: 20,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("Ok"),
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        "Succesfully loged in!",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: Colors.blue,
+                    ),
+                  );
+                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyHomePage(
+                        // will change to the dashboard page
+                        title: '',
                       ),
                     ),
-                  ],
-                );
+                    (route) => false,
+                  );
+                });
+
+                return const SizedBox();
               } else if (snap.hasData && !snap.data!.succeeded!) {
                 return Center(
                   child: SizedBox(

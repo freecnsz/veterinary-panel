@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'screens/home/home_page.dart';
-import 'screens/products/products_page.dart';
 import 'services/product_service/providers/product_provider.dart';
 
 void main() {
@@ -47,9 +46,8 @@ class MyApp extends StatelessWidget {
         routes: {
           MyHomePage.routeName: (context) =>
               const MyHomePage(title: 'Flutter Demo Home Page'),
-          LoginPage.routeName: (context) => LoginPage(),
+          LoginPage.routeName: (context) => const LoginPage(),
         },
-        //home: LoginPage(),
       ),
     );
   }

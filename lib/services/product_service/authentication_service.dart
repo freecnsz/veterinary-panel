@@ -26,11 +26,10 @@ class AuthenticateService {
         var user = UserModel.fromRawJson(response.body);
         return user;
       } else {
-        throw Exception(
-            'Failed to load user with status code ${response.statusCode} and body ${response.body}');
+        throw Exception(response.body);
       }
     } catch (e) {
-      throw Exception('Failed to load products: $e');
+      throw Exception(e);
     }
   }
 }
