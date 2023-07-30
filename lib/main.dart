@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,14 +24,13 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ProductProvider(),
-      child: MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
@@ -50,5 +47,6 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+
   }
 }
