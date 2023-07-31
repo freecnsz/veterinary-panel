@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/home/PetPages/pet_list.dart';
 import 'package:flutter_boilerplate/searchbar.dart';
 import 'package:flutter_boilerplate/user_model.dart';
 import 'package:flutter_boilerplate/users_service.dart';
@@ -46,19 +47,22 @@ class UsersPageState extends State<UsersPage> {
                     child: ListTile(
                         leading: Image.asset('../screenshots/main_top.png'),
                         // ignore: prefer_interpolation_to_compose_strings
-                        title: Text(snapshot
-                                .data!.data![index].financialAccountUserName
-                                .toString() +
-                            " " +
-                            snapshot
-                                .data!.data![index].financialAccountUserLastName
-                                .toString()),
+                        title: Text(
+                          snapshot.data!.data![index].financialAccountUserName
+                                  .toString() +
+                              " " +
+                              snapshot.data!.data![index]
+                                  .financialAccountUserLastName
+                                  .toString(),
+                          style: const TextStyle(color: Colors.black),
+                        ),
                         subtitle: Column(children: [
                           Row(
                             children: [
                               const Icon(
                                 Icons.phone,
                                 size: 15,
+                                color: Colors.black,
                               ),
                               Text(
                                   "  ${snapshot.data!.data![index].financialAccountPhoneNumber}"),
@@ -69,6 +73,7 @@ class UsersPageState extends State<UsersPage> {
                               const Icon(
                                 Icons.email,
                                 size: 15,
+                                color: Colors.black,
                               ),
                               Text(
                                   "  ${snapshot.data!.data![index].financialAccountEmail}"),
@@ -79,7 +84,12 @@ class UsersPageState extends State<UsersPage> {
                           icon: const Icon(
                               IconData(0xe4a1, fontFamily: 'MaterialIcons'),
                               color: Colors.orange),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AllPetsPage()));
+                          },
                         )),
                   );
                 } else {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
+import 'package:flutter_boilerplate/screens/login/login.dart';
+import 'package:flutter_boilerplate/users_page.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -33,8 +36,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('ANASAYFA'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const PetByID()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Dashboard()));
         },
       ),
       ListTile(
@@ -42,8 +45,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('MÜŞTERİLER'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const Dashboard()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const UsersPage()));
         },
       ),
       ListTile(
@@ -71,7 +74,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
         leading: const Icon(Icons.logout),
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginPage()));
+        },
       ),
       // ExpansionTile(
       //   leading: const Icon(Icons.perm_device_information),

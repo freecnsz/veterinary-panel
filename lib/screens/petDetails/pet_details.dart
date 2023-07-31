@@ -4,6 +4,7 @@ import 'dart:js_util';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/models/pet_growth_model.dart';
 import 'package:flutter_boilerplate/models/pet_model.dart';
+import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
 import 'package:flutter_boilerplate/services/pet_growth_service.dart';
 import 'package:intl/intl.dart';
 import '../../services/pet_details_service.dart';
@@ -266,70 +267,79 @@ class _PetDetailsState extends State<PetDetails> {
                         ExpansionTile(
                           title: const Text("Detaylar"),
                           children: [
-                            Column(
-                              children: [
-                                FutureBuilder<GrowthModel>(
-                                  future: growth,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData &&
-                                        snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                      var index;
-                                      var now = DateTime.now();
-                                      for (var index = 0;
-                                          index < snapshot.data!.data!.length;
-                                          index++) {
-                                        if (DateFormat('MMMM').format(now) ==
-                                            "July") {
-                                          return Row(
-                                            children: [
-                                              Text(snapshot
-                                                  .data!.data![0].nameOfMonth
-                                                  .toString()),
-                                              Text(snapshot.data!.data![0].value
-                                                  .toString()),
-                                            ],
-                                          );
-                                        }
-                                        return Text("data");
-                                      }
-                                      return Text("data");
-                                      // return ListView.builder(
-                                      //   itemCount: snapshot.data!.data!.length,
-                                      //   itemBuilder: (context, index) {
-                                      //     while (index < 1) {
-                                      //       return ListTile(
-                                      //         title: Text(snapshot
-                                      //             .data!.data![1].nameOfMonth
-                                      //             .toString()),
-                                      //       );
-                                      //     }
-                                      //     return Text(snapshot
-                                      //         .data!.data![index].nameOfMonth
-                                      //         .toString());
-                                      //   },
-                                      // );
-                                    } else {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  },
-                                ),
-                                FutureBuilder<GrowthModel>(
-                                  future: growth1,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData &&
-                                        snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                      return Card();
-                                    } else {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  },
-                                )
-                              ],
-                            )
+                            // Column(
+                            //   children: [
+                            //     FutureBuilder<GrowthModel>(
+                            //       future: growth,
+                            //       builder: (context, snapshot) {
+                            //         if (snapshot.hasData &&
+                            //             snapshot.connectionState ==
+                            //                 ConnectionState.done) {
+                            //           var index;
+                            //           var now = DateTime.now();
+                            //           for (var index = 0;
+                            //               index < snapshot.data!.data!.length;
+                            //               index++) {
+                            //             if (DateFormat('MMMM').format(now) ==
+                            //                 "July") {
+                            //               return Row(
+                            //                 children: [
+                            //                   Text(snapshot
+                            //                       .data!.data![0].nameOfMonth
+                            //                       .toString()),
+                            //                   Text(snapshot.data!.data![0].value
+                            //                       .toString()),
+                            //                 ],
+                            //               );
+                            //             }
+                            //             return Text("data");
+                            //           }
+                            //           return Text("data");
+                            //           // return ListView.builder(
+                            //           //   itemCount: snapshot.data!.data!.length,
+                            //           //   itemBuilder: (context, index) {
+                            //           //     while (index < 1) {
+                            //           //       return ListTile(
+                            //           //         title: Text(snapshot
+                            //           //             .data!.data![1].nameOfMonth
+                            //           //             .toString()),
+                            //           //       );
+                            //           //     }
+                            //           //     return Text(snapshot
+                            //           //         .data!.data![index].nameOfMonth
+                            //           //         .toString());
+                            //           //   },
+                            //           // );
+                            //         } else {
+                            //           return const Center(
+                            //               child: CircularProgressIndicator());
+                            //         }
+                            //       },
+                            //     ),
+                            //     FutureBuilder<GrowthModel>(
+                            //       future: growth1,
+                            //       builder: (context, snapshot) {
+                            //         if (snapshot.hasData &&
+                            //             snapshot.connectionState ==
+                            //                 ConnectionState.done) {
+                            //           return Card();
+                            //         } else {
+                            //           return const Center(
+                            //               child: CircularProgressIndicator());
+                            //         }
+                            //       },
+                            //     )
+                            //   ],
+                            // )
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VaccinePage()));
+                                },
+                                icon: const Icon(Icons.vaccines))
                           ],
                         ),
                         const SizedBox(

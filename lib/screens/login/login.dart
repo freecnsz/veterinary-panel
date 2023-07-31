@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/home/home_page.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
   bool rememberMe = false;
-  bool passwordVisible = false;
+  bool passwordVisible = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -168,12 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pop(context);
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyHomePage(
-                        // will change to the dashboard page
-                        title: '',
-                      ),
-                    ),
+                    MaterialPageRoute(builder: (context) => const Dashboard()),
                     (route) => false,
                   );
                 });
