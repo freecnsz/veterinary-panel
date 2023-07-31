@@ -1,20 +1,22 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SPService {
-  // Function to save the token to local memory
-  Future<bool> saveTokenToMemory(String token) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString('token', token);
+  static const _key = "token";
+  get _secureStorage =>
+      const FlutterSecureStorage(); // initialize secure storage
+
+  // Save the token as encrypted in secure storage
+  Future<void> saveToken(String token) async {
+    await _secureStorage.write(key: _key, value: token);
   }
 
-  // Function to retrieve the token from local memory
-  Future<String?> getTokenFromMemory() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
+  // Get the encrypted token from secure storage
+  Future<String?> getToken() async {
+    return await _secureStorage.read(key: _key);
   }
 
-  Future<void> removeTokenFromMemory() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('token');
+  // Delete the token from secure storage
+  Future<void> deleteToken() async {
+    await _secureStorage.delete(key: _key);
   }
 }
