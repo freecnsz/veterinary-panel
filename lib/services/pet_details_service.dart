@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_boilerplate/models/pet_model.dart';
+import 'package:flutter_boilerplate/models/pet_vaccine_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -22,6 +23,22 @@ class PetService {
         return PetModel.fromRawJson(response.body);
       default:
         return PetModel.fromJson(json.decode(response.body));
+    }
+  }
+
+  Future<PetVaccineModel> getListVaccines(String id) async {
+    var url = Uri.parse(
+        "https://comnets.arabulucuyuz.net/petapi/v1/PetVaccine/GetAllPetVaccinesByPetId?PetId=$id");
+    final http.Response response = await http.get(
+      url,
+      headers: token,
+    );
+
+    switch (response.statusCode) {
+      case 200:
+        return PetVaccineModel.fromRawJson(response.body);
+      default:
+        return PetVaccineModel.fromJson(json.decode(response.body));
     }
   }
 }

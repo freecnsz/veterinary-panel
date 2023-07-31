@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/models/pet_growth_model.dart';
 import 'package:flutter_boilerplate/models/pet_model.dart';
-import 'package:flutter_boilerplate/models/vaccine_model.dart';
+import 'package:flutter_boilerplate/models/pet_vaccine_model.dart';
 import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
 import 'package:flutter_boilerplate/services/pet_growth_service.dart';
-import 'package:flutter_boilerplate/services/product_service/vaccines/vaccine_service.dart';
 import 'package:intl/intl.dart';
 import '../../services/pet_details_service.dart';
 
@@ -27,7 +26,7 @@ petimage
 class _PetDetailsState extends State<PetDetails> {
   late Future<GrowthModel> growth;
   late Future<GrowthModel> growth1;
-  late Future<VaccineModel> _vaccinesFuture;
+  late Future<PetVaccineModel> _vaccinesFuture;
   late Future<PetModel> pet;
 
   @override
@@ -35,7 +34,7 @@ class _PetDetailsState extends State<PetDetails> {
     growth = GrowthService().getEn(widget.id);
     growth1 = GrowthService().getBoy(widget.id);
     pet = PetService().getPetDetails(widget.id);
-    _vaccinesFuture = VaccineService().getVaccines();
+    _vaccinesFuture = PetService().getListVaccines(widget.id);
     super.initState();
   }
 
@@ -137,8 +136,11 @@ class _PetDetailsState extends State<PetDetails> {
                                     ),
                                     snapshot.data!.data!.status == true
                                         ? const Icon(
-                                            IconData(0xe4a1,
-                                                fontFamily: 'MaterialIcons'),
+                                            color: Colors.orange,
+                                            IconData(
+                                              0xe4a1,
+                                              fontFamily: 'MaterialIcons',
+                                            ),
                                           )
                                         : SizedBox(
                                             width: 30,
@@ -274,65 +276,112 @@ class _PetDetailsState extends State<PetDetails> {
                               },
                               icon: const Icon(Icons.vaccines)),
                         ),
-                        const SizedBox(
-                          height: 25,
-                        ),
                         ExpansionTile(
                           title: const Text("Detaylar"),
                           children: [
-                            FutureBuilder<VaccineModel>(
-                              future: _vaccinesFuture,
-                              builder: (context,
-                                  AsyncSnapshot<VaccineModel> snapshot) {
-                                if (snapshot.hasData) {
-                                  if (snapshot.data!.succeeded!) {
-                                    return ListView.builder(
-                                      itemCount: snapshot.data!.data!.length,
-                                      itemBuilder: (context, index) {
-                                        return Column(
-                                          children: [
-                                            ExpansionTile(
-                                              iconColor: Colors.blue,
-                                              leading: const Icon(
-                                                  Icons.vaccines_outlined,
-                                                  color: Colors.blue),
-                                              title: ListTile(
-                                                //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
-                                                title: Text(
-                                                    "${snapshot.data!.data![index].name}"),
-                                                subtitle: Text(snapshot.data!
-                                                    .data![index].productName!),
-                                                trailing: IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(Icons.add),
-                                                  color: Colors.blue,
-                                                ),
+                            Column(
+                              children: [
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Text("Aşı Adı"),
+                                      SizedBox(
+                                        width: 2,
+                                      ),
+                                      Text("Aşı Tarihi"),
+                                      Text("Klinik"),
+                                      Text("Ürün Adı"),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                FutureBuilder<PetVaccineModel>(
+                                  future: _vaccinesFuture,
+                                  builder: (context,
+                                      AsyncSnapshot<PetVaccineModel> snapshot) {
+                                    var dateFormat = DateFormat('dd/MM/yyyy');
+                                    if (snapshot.hasData) {
+                                      if (snapshot.data!.succeeded!) {
+                                        return ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              snapshot.data!.data!.length,
+                                          itemBuilder: (context, index) {
+                                            return SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        Text(
+                                                          snapshot.data!
+                                                              .data![index].name
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 2,
+                                                        ),
+                                                        Text(dateFormat.format(
+                                                            snapshot
+                                                                .data!
+                                                                .data![index]
+                                                                .date!)),
+                                                        Text(snapshot.data!
+                                                            .data![index].clinic
+                                                            .toString()),
+                                                        Text(snapshot
+                                                            .data!
+                                                            .data![index]
+                                                            .productName
+                                                            .toString()),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 100.0,
+                                                            right: 100.0),
+                                                    child: Divider(
+                                                      color: Colors
+                                                          .orange.shade500,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
+                                            );
+                                          },
                                         );
-                                      },
-                                    );
-                                  } else {
-                                    return Center(
-                                      child: Text(snapshot.data!.message!),
-                                    );
-                                  }
-                                } else if (snapshot.hasError) {
-                                  return Center(
-                                    child: Text(snapshot.error.toString()),
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                              },
+                                      } else {
+                                        return Center(
+                                          child: Text(snapshot.data!.message!),
+                                        );
+                                      }
+                                    } else if (snapshot.hasError) {
+                                      return Center(
+                                        child: Text(snapshot.error.toString()),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        const SizedBox(
-                          height: 20,
                         )
                       ],
                     ),
