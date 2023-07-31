@@ -134,24 +134,21 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(defaultPadding),
-                      child: Container(
-                        width: 250,
-                        height: 110,
-                        decoration: cardDecoration,
-                        child: Center(
-                          child: Column(
-                            children: const [
-                              ListTile(
-                                leading: Icon(Icons.monetization_on),
-                                title: Text("Günlük Ciro"),
-                                subtitle: Text("0,00 ₺ ",
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white)),
-                              ),
-                            ],
-                          ),
+                    Container(
+                      width: 250,
+                      height: 110,
+                      decoration: cardDecoration,
+                      child: Center(
+                        child: Column(
+                          children: const [
+                            ListTile(
+                              leading: Icon(Icons.monetization_on),
+                              title: Text("Günlük Ciro"),
+                              subtitle: Text("0,00 ₺ ",
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.white)),
+                            ),
+                          ],
                         ),
                       ),
                     ),
