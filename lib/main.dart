@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants.dart';
-import 'screens/home/home_page.dart';
-import 'screens/products/products_page.dart';
+import 'screens/dashboard/dasboard.dart';
 import 'services/product_service/providers/product_provider.dart';
 
 void main() {
@@ -27,14 +25,13 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ProductProvider(),
-      child: MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
@@ -43,13 +40,12 @@ class MyApp extends StatelessWidget {
               .apply(bodyColor: Colors.white),
           canvasColor: secondaryColor,
         ),
-        home: const VaccinePage(),
-        //initialRoute: MyHomePage.routeName,
-        // routes: {
-        //   MyHomePage.routeName: (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
-        //   ProductsPage.routeName: (context) => const ProductsPage(),
-        // },
+        initialRoute: Dashboard.routeName,
+        routes: {
+          Dashboard.routeName: (context) => const Dashboard(),
+        },
       ),
     );
+
   }
 }
