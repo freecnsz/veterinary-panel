@@ -48,12 +48,7 @@ class UsersPageState extends State<UsersPage> {
                         leading: Image.asset('../screenshots/user.png'),
                         // ignore: prefer_interpolation_to_compose_strings
                         title: Text(
-                          snapshot.data!.data![index].financialAccountUserName
-                                  .toString() +
-                              " " +
-                              snapshot.data!.data![index]
-                                  .financialAccountUserLastName
-                                  .toString(),
+                          "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}",
                           style: const TextStyle(color: Colors.black),
                         ),
                         subtitle: Column(children: [

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
-import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:flutter_boilerplate/searchbar.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
