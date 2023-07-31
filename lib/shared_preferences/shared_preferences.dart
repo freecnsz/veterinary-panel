@@ -12,4 +12,9 @@ class SPService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
   }
+
+  Future<void> removeTokenFromMemory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+  }
 }

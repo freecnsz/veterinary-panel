@@ -4,7 +4,6 @@ import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'screens/home/home_page.dart';
 import 'services/product_service/providers/product_provider.dart';
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
       routes: {
         MyHomePage.routeName: (context) =>
             const MyHomePage(title: 'Flutter Demo Home Page'),
-        LoginPage.routeName: (context) => const Dashboard(),
+        LoginPage.routeName: (context) => const LoginPage(),
       },
     );
   }
