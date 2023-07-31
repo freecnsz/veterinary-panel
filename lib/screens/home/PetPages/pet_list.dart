@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
-import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:flutter_boilerplate/searchbar.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
@@ -60,7 +59,7 @@ class AllPetsPageState extends State<AllPetsPage> {
                     ? pic = snapshot.data!.data![index].petImage
                     : pic = "";
                 var photo = base64Decode(pic);
-                searchTerms.add(snapshot.data!.data![index].id.toString());
+                searchTerms.add(snapshot.data!.data![index].name.toString());
                 return Card(
                   color: Colors.white,
                   elevation: 10,

@@ -7,11 +7,10 @@ class AddVaccinePage extends StatefulWidget {
   State<AddVaccinePage> createState() => _AddVaccinePageState();
 }
 
-  String name = "";
-  String productName = "";
+String name = "";
+String productName = "";
 
 class _AddVaccinePageState extends State<AddVaccinePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _AddVaccinePageState extends State<AddVaccinePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.symmetric(horizontal:100),
+              margin: const EdgeInsets.symmetric(horizontal: 100),
               child: TextField(
                 onChanged: (value) {
                   setState(() {
@@ -41,10 +40,11 @@ class _AddVaccinePageState extends State<AddVaccinePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal:100),
-          
+              margin: const EdgeInsets.symmetric(horizontal: 100),
               child: TextField(
                 onChanged: (value) {
                   setState(() {
@@ -70,18 +70,17 @@ class _AddVaccinePageState extends State<AddVaccinePage> {
                   //               VaccineService().getVaccines();
                   //         }));
                 },
-                child: const Text("Aşı Ekle"),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue[800],
+                  backgroundColor: Colors.blue[800],
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     //  color: Colors.blue,
                   ),
                   elevation: 2.0,
                 ),
+                child: const Text("Aşı Ekle"),
               ),
             ),
           ],

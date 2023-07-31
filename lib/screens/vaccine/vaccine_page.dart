@@ -25,7 +25,7 @@ class _VaccinePageState extends State<VaccinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Aşı Listesi'),
+        title: const Text('Aşı Listesi'),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () {
@@ -33,30 +33,27 @@ class _VaccinePageState extends State<VaccinePage> {
         //   },
         // ),
         actions: [
-          Container(
-            // margin: const EdgeInsets.all(45),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AddVaccinePage()))
-                    .whenComplete(() => setState(() {
-                          _vaccinesFuture = VaccineService().getVaccines();
-                        }));
-              },
-              child: const Text("Aşı Ekle"),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue[800],
-                // padding:
-                //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  //  color: Colors.blue,
-                ),
-                elevation: 2.0,
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddVaccinePage()))
+                  .whenComplete(() => setState(() {
+                        _vaccinesFuture = VaccineService().getVaccines();
+                      }));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[800],
+              // padding:
+              //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                //  color: Colors.blue,
               ),
+              elevation: 2.0,
             ),
+            child: const Text("Aşı Ekle"),
           ),
         ],
       ),
@@ -77,11 +74,11 @@ class _VaccinePageState extends State<VaccinePage> {
                         title: ListTile(
                           //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
                           title: Text("${snapshot.data!.data![index].name}"),
-                          subtitle: Text(
-                              "${snapshot.data!.data![index].productName!}"),
+                          subtitle:
+                              Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             color: Colors.blue,
                           ),
                         ),

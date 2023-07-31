@@ -177,17 +177,15 @@ class _DashboardState extends State<Dashboard> {
                       decoration: cardDecoration2,
                       child: Column(
                         children: [
-                          Expanded(
-                            child: Container(
-                              child: const ListTile(
-                                leading: Icon(
-                                  Icons.replay,
-                                  color: Colors.black,
-                                ),
-                                title: Text("Geçmiş Randevular",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                          Container(
+                            child: const ListTile(
+                              leading: Icon(
+                                Icons.replay,
+                                color: Colors.black,
                               ),
+                              title: Text("Geçmiş Randevular",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                             ),
                           ),
                           const Divider(),
