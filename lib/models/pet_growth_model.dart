@@ -1,116 +1,70 @@
+// To parse this JSON data, do
+//
+//     final growthModel = growthModelFromJson(jsonString);
+
+import 'dart:convert';
+
 class GrowthModel {
-  int? pageNumber;
-  int? pageSize;
-  int? recordsFiltered;
-  int? recordsTotal;
-  bool? hasNextPage;
-  bool? hasPreviousPage;
-  bool? isFirstPage;
-  bool? isLastPage;
-  int? pageCount;
-  int? lastItemOnPage;
-  int? firstItemOnPage;
-  bool? succeeded;
-  Null? message;
-  Null? errors;
-  List<Data>? data;
+  List<Datum>? data;
 
-  GrowthModel(
-      {this.pageNumber,
-      this.pageSize,
-      this.recordsFiltered,
-      this.recordsTotal,
-      this.hasNextPage,
-      this.hasPreviousPage,
-      this.isFirstPage,
-      this.isLastPage,
-      this.pageCount,
-      this.lastItemOnPage,
-      this.firstItemOnPage,
-      this.succeeded,
-      this.message,
-      this.errors,
-      this.data});
+  GrowthModel({
+    this.data,
+  });
 
-  GrowthModel.fromJson(Map<String, dynamic> json) {
-    pageNumber = json['pageNumber'];
-    pageSize = json['pageSize'];
-    recordsFiltered = json['recordsFiltered'];
-    recordsTotal = json['recordsTotal'];
-    hasNextPage = json['hasNextPage'];
-    hasPreviousPage = json['hasPreviousPage'];
-    isFirstPage = json['isFirstPage'];
-    isLastPage = json['isLastPage'];
-    pageCount = json['pageCount'];
-    lastItemOnPage = json['lastItemOnPage'];
-    firstItemOnPage = json['firstItemOnPage'];
-    succeeded = json['succeeded'];
-    message = json['message'];
-    errors = json['errors'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
+  factory GrowthModel.fromRawJson(String str) =>
+      GrowthModel.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pageNumber'] = this.pageNumber;
-    data['pageSize'] = this.pageSize;
-    data['recordsFiltered'] = this.recordsFiltered;
-    data['recordsTotal'] = this.recordsTotal;
-    data['hasNextPage'] = this.hasNextPage;
-    data['hasPreviousPage'] = this.hasPreviousPage;
-    data['isFirstPage'] = this.isFirstPage;
-    data['isLastPage'] = this.isLastPage;
-    data['pageCount'] = this.pageCount;
-    data['lastItemOnPage'] = this.lastItemOnPage;
-    data['firstItemOnPage'] = this.firstItemOnPage;
-    data['succeeded'] = this.succeeded;
-    data['message'] = this.message;
-    data['errors'] = this.errors;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory GrowthModel.fromJson(Map<String, dynamic> json) => GrowthModel(
+        data: json["data"] == null
+            ? []
+            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
-class Data {
+class Datum {
   int? id;
   int? petId;
   int? value;
   int? growthType;
-  String? date;
+  DateTime? date;
   String? nameOfMonth;
 
-  Data(
-      {this.id,
-      this.petId,
-      this.value,
-      this.growthType,
-      this.date,
-      this.nameOfMonth});
+  Datum({
+    this.id,
+    this.petId,
+    this.value,
+    this.growthType,
+    this.date,
+    this.nameOfMonth,
+  });
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    petId = json['petId'];
-    value = json['value'];
-    growthType = json['growthType'];
-    date = json['date'];
-    nameOfMonth = json['nameOfMonth'];
-  }
+  factory Datum.fromRawJson(String str) => Datum.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['petId'] = this.petId;
-    data['value'] = this.value;
-    data['growthType'] = this.growthType;
-    data['date'] = this.date;
-    data['nameOfMonth'] = this.nameOfMonth;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        petId: json["petId"],
+        value: json["value"],
+        growthType: json["growthType"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        nameOfMonth: json["nameOfMonth"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "petId": petId,
+        "value": value,
+        "growthType": growthType,
+        "date": date?.toIso8601String(),
+        "nameOfMonth": nameOfMonth,
+      };
 }

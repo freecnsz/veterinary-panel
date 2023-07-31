@@ -17,12 +17,13 @@ class GrowthService {
       url,
       headers: token,
     );
-    print(response.body);
+
     switch (response.statusCode) {
       case 200:
-        return json.decode(response.body);
+        final jsonResponse = json.decode(response.body);
+        return GrowthModel.fromJson(jsonResponse); // Parse the JSON here
       default:
-        return json.decode(response.body);
+        throw Exception('Failed to load data');
     }
   }
 
@@ -36,9 +37,10 @@ class GrowthService {
 
     switch (response.statusCode) {
       case 200:
-        return json.decode(response.body);
+        final jsonResponse = json.decode(response.body);
+        return GrowthModel.fromJson(jsonResponse); // Parse the JSON here
       default:
-        return json.decode(response.body);
+        throw Exception('Failed to load data');
     }
   }
 }
