@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
+import 'package:flutter_boilerplate/searchbar.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
 
 class AllPetsPage extends StatefulWidget {
@@ -21,9 +22,12 @@ class AllPetsPageState extends State<AllPetsPage> {
     HttpHeaders.authorizationHeader:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiMjI5YmI5ZGQtNDczNi00MDIzLTllYjItODA5OTkwNzBiOTRjIiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTA5OTkxOSwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.37jdvhfMHXsMiifCqOvRe8ROyOcn_hQvr-ITSt9ZZcQ'
   };
+  late List<String> searchTerms;
+
   @override
   void initState() {
     _futurePets = PetService.getPets(token);
+    searchTerms = [];
     super.initState();
   }
 
@@ -36,7 +40,9 @@ class AllPetsPageState extends State<AllPetsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        //title: const SearchBar(),
+        title: SearchBar(
+          searchTerms: searchTerms,
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -48,6 +54,7 @@ class AllPetsPageState extends State<AllPetsPage> {
             return ListView.builder(
               itemCount: snapshot.data!.data!.length,
               itemBuilder: (context, index) {
+                searchTerms.add(snapshot.data!.data![index].name.toString());
                 return Card(
                   color: Colors.white,
                   elevation: 10,

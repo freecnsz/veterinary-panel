@@ -26,16 +26,15 @@ class _VaccinePageState extends State<VaccinePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Aşı Listesi'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            //    Navigator.pop(context);
-          },
-        ),
-actions: [
-  
-    Container(
-           // margin: const EdgeInsets.all(45),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     //    Navigator.pop(context);
+        //   },
+        // ),
+        actions: [
+          Container(
+            // margin: const EdgeInsets.all(45),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -43,15 +42,14 @@ actions: [
                         MaterialPageRoute(
                             builder: (context) => const AddVaccinePage()))
                     .whenComplete(() => setState(() {
-                            _vaccinesFuture =
-                              VaccineService().getVaccines();
+                          _vaccinesFuture = VaccineService().getVaccines();
                         }));
               },
               child: const Text("Aşı Ekle"),
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue[800],
-               // padding:
-                 //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                // padding:
+                //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   //  color: Colors.blue,
@@ -59,12 +57,8 @@ actions: [
                 elevation: 2.0,
               ),
             ),
-          
           ),
-
-],
-
-
+        ],
       ),
       body: FutureBuilder<VaccineModel>(
         future: _vaccinesFuture,
