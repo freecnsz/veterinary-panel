@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'screens/home/home_page.dart';
-
 import 'services/product_service/providers/product_provider.dart';
+
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
