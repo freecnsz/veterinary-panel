@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:js_util';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/models/pet_growth_model.dart';
@@ -260,7 +259,7 @@ class _PetDetailsState extends State<PetDetails> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 100,
                         ),
                         ExpansionTile(
@@ -274,6 +273,7 @@ class _PetDetailsState extends State<PetDetails> {
                                     if (snapshot.hasData &&
                                         snapshot.connectionState ==
                                             ConnectionState.done) {
+                                      // ignore: prefer_typing_uninitialized_variables, unused_local_variable
                                       var index;
                                       var now = DateTime.now();
                                       for (var index = 0;
@@ -291,9 +291,9 @@ class _PetDetailsState extends State<PetDetails> {
                                             ],
                                           );
                                         }
-                                        return Text("data");
+                                        return const Text("data");
                                       }
-                                      return Text("data");
+                                      return const Text("data");
                                       // return ListView.builder(
                                       //   itemCount: snapshot.data!.data!.length,
                                       //   itemBuilder: (context, index) {
@@ -321,7 +321,7 @@ class _PetDetailsState extends State<PetDetails> {
                                     if (snapshot.hasData &&
                                         snapshot.connectionState ==
                                             ConnectionState.done) {
-                                      return Card();
+                                      return const Card();
                                     } else {
                                       return const Center(
                                           child: CircularProgressIndicator());

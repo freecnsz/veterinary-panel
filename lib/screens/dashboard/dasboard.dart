@@ -170,6 +170,7 @@ class _DashboardState extends State<Dashboard> {
                     decoration: cardDecoration2,
                     child: Column(
                       children: [
+                        // ignore: avoid_unnecessary_containers
                         Container(
                           child: const ListTile(
                             leading: Icon(
@@ -245,6 +246,7 @@ class _DashboardState extends State<Dashboard> {
                       decoration: cardDecoration2,
                       child: Column(
                         children: [
+                          // ignore: avoid_unnecessary_containers
                           Container(
                             child: const ListTile(
                               leading: Icon(
