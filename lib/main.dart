@@ -2,12 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
-import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'screens/home/home_page.dart';
-import 'services/product_service/providers/product_provider.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
