@@ -44,7 +44,7 @@ class UsersPageState extends State<UsersPage> {
                     color: Colors.white,
                     elevation: 10,
                     child: ListTile(
-                        leading: Image.asset('../screenshots/main_top.png'),
+                        leading: Image.asset('../screenshots/user.png'),
                         // ignore: prefer_interpolation_to_compose_strings
                         title: Text(snapshot
                                 .data!.data![index].financialAccountUserName

@@ -52,11 +52,11 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    // for (var element in searchTerms) {
-    //   if (element.toLowerCase().contains(query.toLowerCase())) {
-    //     matchQuery.add(element);
-    //   }
-    // }
+    for (var element in searchTerms) {
+      if (element.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(element);
+      }
+    }
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
