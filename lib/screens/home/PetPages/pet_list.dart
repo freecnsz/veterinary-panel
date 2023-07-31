@@ -94,7 +94,7 @@ class AllPetsPageState extends State<AllPetsPage> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return const CircularProgressIndicator();
+          return Center(child: const CircularProgressIndicator());
         },
       ),
     );
