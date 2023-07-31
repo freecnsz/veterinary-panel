@@ -280,21 +280,20 @@ class _PetDetailsState extends State<PetDetails> {
                           title: const Text("Detaylar"),
                           children: [
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: const [
-                                      Text("Aşı Adı"),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text("Aşı Tarihi"),
-                                      Text("Klinik"),
-                                      Text("Ürün Adı"),
-                                    ],
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: const [
+                                    Text("Aşı Adı"),
+                                    SizedBox(
+                                      width: 2,
+                                    ),
+                                    Text("Aşı Tarihi"),
+                                    Text("Klinik"),
+                                    Text("Ürün Adı"),
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 5,
@@ -313,40 +312,39 @@ class _PetDetailsState extends State<PetDetails> {
                                           itemBuilder: (context, index) {
                                             return SingleChildScrollView(
                                               child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  Center(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        Text(
-                                                          snapshot.data!
-                                                              .data![index].name
-                                                              .toString(),
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 2,
-                                                        ),
-                                                        Text(dateFormat.format(
-                                                            snapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .date!)),
-                                                        Text(snapshot.data!
-                                                            .data![index].clinic
-                                                            .toString()),
-                                                        Text(snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .productName
-                                                            .toString()),
-                                                      ],
-                                                    ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      Text(
+                                                        snapshot.data!
+                                                            .data![index].name
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 2,
+                                                      ),
+                                                      Text(dateFormat.format(
+                                                          snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .date!)),
+                                                      Text(snapshot.data!
+                                                          .data![index].clinic
+                                                          .toString()),
+                                                      Text(snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .productName
+                                                          .toString()),
+                                                    ],
                                                   ),
                                                   Padding(
                                                     padding:
