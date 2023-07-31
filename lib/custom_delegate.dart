@@ -43,6 +43,7 @@ class CustomSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             result,
+            style: const TextStyle(color: Colors.white),
           ),
         );
       },
@@ -52,11 +53,11 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    // for (var element in searchTerms) {
-    //   if (element.toLowerCase().contains(query.toLowerCase())) {
-    //     matchQuery.add(element);
-    //   }
-    // }
+    for (var element in searchTerms) {
+      if (element.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(element);
+      }
+    }
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
@@ -64,6 +65,7 @@ class CustomSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             result,
+            style: const TextStyle(color: Colors.white),
           ),
         );
       },

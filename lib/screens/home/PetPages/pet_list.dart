@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
+import 'package:flutter_boilerplate/screens/login/login.dart';
+import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
 
 class AllPetsPage extends StatefulWidget {
@@ -63,11 +65,17 @@ class AllPetsPageState extends State<AllPetsPage> {
                     ),
                     tileColor: index.isOdd ? oddItemColor : evenItemColor,
                     subtitle: Text(
-                        snapshot.data!.data![index].status.toString(),
+                        snapshot.data!.data![index].breedName.toString(),
                         style: const TextStyle(color: Colors.black)),
                     trailing: IconButton(
                       onPressed: () {
-                        //infoya gidicek
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PetDetails(
+                                      id: snapshot.data!.data![index].id
+                                          .toString(),
+                                    )));
                       },
                       icon: const Icon(Icons.arrow_forward_ios),
                       color: Colors.black,
