@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/home/PetPages/pet_list.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -33,8 +34,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('ANASAYFA'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const PetByID()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AllPetsPage()));
         },
       ),
       ListTile(
@@ -43,7 +44,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
           // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const Dashboard()));
+          //     MaterialPageRoute(builder: (context) => const AllPetsPage()));
         },
       ),
       ListTile(
@@ -73,18 +74,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
         trailing: const Icon(Icons.arrow_right),
         onTap: () {},
       ),
-      // ExpansionTile(
-      //   leading: const Icon(Icons.perm_device_information),
-      //   title: const Text('İŞLEMLER'),
-      //   trailing: const Icon(Icons.arrow_right),
-      //   children: <Widget>[
-      //     ListTile(
-      //       title: const Text('Kiracılarım'),
-      //       trailing: const Icon(Icons.arrow_right),
-      //       onTap: () {},
-      //     ),
-      //   ],
-      // )
     ])));
   }
 }
