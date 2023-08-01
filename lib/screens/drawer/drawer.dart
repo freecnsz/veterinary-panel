@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
-import 'package:flutter_boilerplate/users_page.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -79,32 +78,5 @@ class _DrawerMenuState extends State<DrawerMenu> {
         },
       ),
     ])));
-  }
-
-  void _showExitDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Çıkış Yap'),
-        content: const Text('Çıkış yapmak istediğinizden emin misiniz?'),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Dialog kutusunu kapat
-            },
-            child: const Text('İptal'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                  (route) => false);
-            },
-            child: const Text('Çıkış Yap'),
-          ),
-        ],
-      ),
-    );
   }
 }
