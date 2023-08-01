@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
 import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
-import 'package:flutter_boilerplate/shared_preferences/me.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
