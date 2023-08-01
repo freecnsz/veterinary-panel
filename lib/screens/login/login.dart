@@ -195,7 +195,11 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             style: const TextStyle(color: Colors.black),
                             obscureText: passwordVisible,
-                            onFieldSubmitted: (value) => login(),
+                            onFieldSubmitted: (value) {
+                              if (_formKey.currentState!.validate()) {
+                                login();
+                              }
+                            },
                             decoration: InputDecoration(
                               focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.amber)),

@@ -45,7 +45,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
         leading: const Icon(Icons.person),
         title: const Text('MÜŞTERİLER'),
         trailing: const Icon(Icons.arrow_right),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const UsersPage()));
+        },
       ),
       ListTile(
         leading: const Icon(Icons.calendar_month_outlined),
@@ -73,9 +76,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          SPService().deleteToken();
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginPage()));
+          _showExitDialog(context);
         },
       ),
     ])));
@@ -96,6 +97,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           ),
           ElevatedButton(
             onPressed: () {
+              SPService().deleteToken();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),

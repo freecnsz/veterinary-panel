@@ -53,11 +53,11 @@ class AllPetsPageState extends State<AllPetsPage> {
             return ListView.builder(
               itemCount: snapshot.data!.data!.length,
               itemBuilder: (context, index) {
-                var pic;
+                String? pic;
                 snapshot.data!.data![index].petImage != null
                     ? pic = snapshot.data!.data![index].petImage
                     : pic = "";
-                var photo = base64Decode(pic);
+                var photo = base64Decode(pic!);
                 if (!searchTerms
                     .contains(snapshot.data!.data![index].name.toString())) {
                   searchTerms.add(snapshot.data!.data![index].name.toString());

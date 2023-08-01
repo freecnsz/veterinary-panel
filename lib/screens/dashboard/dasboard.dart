@@ -91,7 +91,6 @@ class _DashboardState extends State<Dashboard> {
                         const SizedBox(width: 10),
                         IconButton(
                             onPressed: () {},
-
                             icon: const Icon(Icons.notifications)),
                         const Icon(Icons.person),
                         Padding(
@@ -312,16 +311,14 @@ class _DashboardState extends State<Dashboard> {
                         decoration: cardDecoration2,
                         child: Column(
                           children: [
-                            Container(
-                              child: const ListTile(
-                                leading: Icon(
-                                  Icons.refresh_outlined,
-                                  color: Colors.black,
-                                ),
-                                title: Text("Gelecek Randevular",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                            const ListTile(
+                              leading: Icon(
+                                Icons.refresh_outlined,
+                                color: Colors.black,
                               ),
+                              title: Text("Gelecek Randevular",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                             ),
                             const Divider(),
                             FittedBox(
