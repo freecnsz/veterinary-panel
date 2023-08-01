@@ -76,15 +76,15 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-SPService().deleteToken();
+          SPService().deleteToken();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const LoginPage()));
-
         },
       ),
     ])));
   }
 
+  // ignore: unused_element
   void _showExitDialog(BuildContext context) {
     showDialog(
       context: context,

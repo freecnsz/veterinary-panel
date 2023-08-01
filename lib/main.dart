@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
-import 'screens/home/home_page.dart';
+import 'package:flutter_boilerplate/screens/home/home_page.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();

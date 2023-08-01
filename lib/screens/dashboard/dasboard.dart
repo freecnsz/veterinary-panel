@@ -191,7 +191,6 @@ class _DashboardState extends State<Dashboard> {
                     child: Padding(
                       padding: EdgeInsets.all(defaultPadding),
                       child: FittedBox(
-
                         child: Container(
                           width: 250,
                           height: 110,
@@ -204,7 +203,6 @@ class _DashboardState extends State<Dashboard> {
                                   title: const Text("Toplam Kedi Sayısı"),
                                   subtitle: Text(numberOfDogs.toString(),
                                       style: const TextStyle(
-
                                           fontSize: 30, color: Colors.white)),
                                 ),
                               ],
@@ -399,6 +397,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: cardDecoration2,
                         child: Column(
                           children: [
+                            // ignore: avoid_unnecessary_containers
                             Container(
                               child: const ListTile(
                                 leading: Icon(

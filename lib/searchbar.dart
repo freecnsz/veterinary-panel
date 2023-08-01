@@ -33,7 +33,7 @@ class _SearchBarState extends State<SearchBar> {
         child: const Text(
           "Search",
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),

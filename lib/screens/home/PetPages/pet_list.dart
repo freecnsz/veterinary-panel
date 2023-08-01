@@ -23,7 +23,6 @@ class AllPetsPageState extends State<AllPetsPage> {
     HttpHeaders.authorizationHeader:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiYzUzYjk3YjEtMDczNC00Nzg0LTlkYjMtNzcxYTE1ZmZiYjc4IiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTQ2NTI2MiwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.m3EXd2NP3JDQGX0fLcj_cijOiFuu3zl2fT1mum-VjI8'
   };
-  late List<String> searchTerms;
 
   @override
   void initState() {
@@ -56,6 +55,7 @@ class AllPetsPageState extends State<AllPetsPage> {
             return ListView.builder(
               itemCount: snapshot.data!.data!.length,
               itemBuilder: (context, index) {
+                // ignore: prefer_typing_uninitialized_variables
                 var pic;
                 snapshot.data!.data![index].petImage != null
                     ? pic = snapshot.data!.data![index].petImage
@@ -99,7 +99,6 @@ class AllPetsPageState extends State<AllPetsPage> {
             return Text("${snapshot.error}");
           }
           return const Center(child: CircularProgressIndicator());
-
         },
       ),
     );
