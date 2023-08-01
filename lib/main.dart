@@ -30,16 +30,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
       ),
       initialRoute: LoginPage.routeName,
       routes: {
         MyHomePage.routeName: (context) =>
             const MyHomePage(title: 'Flutter Demo Home Page'),
-        LoginPage.routeName: (context) => const LoginPage(),
+        LoginPage.routeName: (context) => const Dashboard(),
       },
     );
   }
