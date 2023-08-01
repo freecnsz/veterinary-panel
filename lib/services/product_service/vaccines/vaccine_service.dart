@@ -32,54 +32,58 @@ class VaccineService {
     }
   }
 
-//     Future<VaccineModel> createVaccine(
-//     // String token,
-//     //  String name,
-//      // String productName,
-//     // String id,
-//   ) async {
-//     try {
-//       var url = Uri.parse(
-//       'https://comnets.arabulucuyuz.net/petapi/v1/Vaccine/CreateVaccine'
-//       );
+    Future<VaccineModel> createPetVaccine(
+    // String token,
+
+      String petId,
+      String vaccineId,
+      DateTime date,
+      String clinic,
+
+  ) async {
+    try {
+      var url = Uri.parse(
+      'https://comnets.arabulucuyuz.net/petapi/v1/PetVaccine/CreatePetVaccineWithPetId'
+      );
     
+      final http.Response response = await http
+          .post(
+            url,
+            headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Authorization": "Bearer $token",
+      },
+            body: jsonEncode({
+            
+              "petId": petId,
+              "vaccineId": vaccineId,
+              "date": date.toUtc().toIso8601String(),
+              "clinic": clinic,
+              
+              // "petId": 0,
+              // "vaccineId": 0,
+              // "date": "2023-07-31T17:43:54.995Z",
+              // "clinic": "string"
+              
 
-//       final http.Response response = await http
-//           .post(
-//             url,
-//             headers: <String, String>{
-//         'Content-Type': 'application/json; charset=UTF-8',
-//         "Authorization": "Bearer $token",
-//       },
-//             body: jsonEncode({
-//               "name": "",
-//               "productName":"",
-// }
-//             ),
-//           )
-//           .timeout(const Duration(seconds: 60));
-//       print(response.body);
-//       switch (response.statusCode) {
-//         case 200:
-//           return VaccineModel.fromRawJson(response.body);
+
+}
+            ),
+          )
+          .timeout(const Duration(seconds: 60));
+     // print(response.body);
+      switch (response.statusCode) {
+        case 200:
+          return VaccineModel.fromRawJson(response.body);
           
-//         default:
-//           return VaccineModel.fromJson(json.decode(response.body));
-//       }
-//     } on TimeoutException {
-//       throw Exception("Timeout... ");
-//     } catch (e) {
-//       throw Exception(e.toString());
-//     }
-//   }
-
-
-
-
-
-
-
-
-
+        default:
+          return VaccineModel.fromJson(json.decode(response.body));
+      }
+    } on TimeoutException {
+      throw Exception("Timeout... ");
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
 }

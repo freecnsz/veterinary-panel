@@ -25,27 +25,27 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: bgColor,
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-              .apply(bodyColor: Colors.white),
-          canvasColor: secondaryColor,
-        ),
-        initialRoute: Dashboard.routeName,
-        routes: {
-          Dashboard.routeName: (context) => const Dashboard(),
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: bgColor,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: Colors.white),
+        canvasColor: secondaryColor,
       ),
-    );
+      // initialRoute: Dashboard.routeName,
+      // routes: {
+      //   Dashboard.routeName: (context) => const Dashboard(),
+    //}
 
+
+      home: VaccinePage(), 
+    );
   }
 }

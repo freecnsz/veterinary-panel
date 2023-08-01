@@ -3,7 +3,7 @@ import 'dart:convert';
 //
 //     final vaccineModel = vaccineModelFromJson(jsonString);
 
-import 'dart:convert';
+//import 'dart:convert';
 
 class VaccineModel {
     int? pageNumber;
@@ -106,5 +106,43 @@ class Datum {
         "id": id,
         "name": name,
         "productName": productName,
+    };
+}
+
+
+
+
+
+
+
+class Vaccine2Model {
+    bool? succeeded;
+    String? message;
+    List<String>? errors;
+    dynamic data;
+
+    Vaccine2Model({
+        this.succeeded,
+        this.message,
+        this.errors,
+        this.data,
+    });
+
+    factory Vaccine2Model.fromRawJson(String str) => Vaccine2Model.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory Vaccine2Model.fromJson(Map<String, dynamic> json) => Vaccine2Model(
+        succeeded: json["Succeeded"],
+        message: json["Message"],
+        errors: json["Errors"] == null ? [] : List<String>.from(json["Errors"]!.map((x) => x)),
+        data: json["Data"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "Succeeded": succeeded,
+        "Message": message,
+        "Errors": errors == null ? [] : List<dynamic>.from(errors!.map((x) => x)),
+        "Data": data,
     };
 }
