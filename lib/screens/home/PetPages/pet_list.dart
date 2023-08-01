@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
 import 'package:flutter_boilerplate/searchbar.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_boilerplate/services/get_pets_service.dart';
 
 class AllPetsPage extends StatefulWidget {
   const AllPetsPage({super.key});
-  static const String routeName = '/AllPetsPage';
 
   @override
   State<StatefulWidget> createState() => AllPetsPageState();
@@ -17,15 +15,19 @@ class AllPetsPage extends StatefulWidget {
 
 class AllPetsPageState extends State<AllPetsPage> {
   late Future<PetsModel> _futurePets;
+  late List<String> searchTerms;
+  late String tokenID;
+
   static Map<String, String> token = {
     HttpHeaders.contentTypeHeader: 'application/json',
     HttpHeaders.authorizationHeader:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiMjI5YmI5ZGQtNDczNi00MDIzLTllYjItODA5OTkwNzBiOTRjIiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTA5OTkxOSwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.37jdvhfMHXsMiifCqOvRe8ROyOcn_hQvr-ITSt9ZZcQ'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiYzUzYjk3YjEtMDczNC00Nzg0LTlkYjMtNzcxYTE1ZmZiYjc4IiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTQ2NTI2MiwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.m3EXd2NP3JDQGX0fLcj_cijOiFuu3zl2fT1mum-VjI8'
   };
   late List<String> searchTerms;
 
   @override
   void initState() {
+    tokenID = "";
     _futurePets = PetService.getPets(token);
     searchTerms = [];
     super.initState();
@@ -68,13 +70,6 @@ class AllPetsPageState extends State<AllPetsPage> {
                         backgroundImage: Image.memory(
                       photo,
                     ).image),
-                    // leading: Icon(
-                    //   Icons.pets,
-                    //   color: snapshot.data!.data![index].status == false
-                    //       ? Colors.grey
-                    //       : Colors.orange,
-                    // ),
-                    // ignore: prefer_interpolation_to_compose_strings
                     title: Text(
                       snapshot.data!.data![index].name.toString(),
                       style: const TextStyle(color: Colors.black),
@@ -103,7 +98,8 @@ class AllPetsPageState extends State<AllPetsPage> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
+
         },
       ),
     );

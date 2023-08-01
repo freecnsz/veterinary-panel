@@ -24,7 +24,8 @@ class _VaccinePageState extends State<VaccinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        title: Text('Aşı Listesi'),
+      appBar: AppBar(
+        title: const Text('Aşı Listesi'),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () {
@@ -32,32 +33,28 @@ class _VaccinePageState extends State<VaccinePage> {
         //   },
         // ),
         actions: [
-          Container(
-            // margin: const EdgeInsets.all(45),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AddVaccinePage()))
-                    .whenComplete(() => setState(() {
-                          _vaccinesFuture = VaccineService().getVaccines();
-                        }));
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue[800],
-                // padding:
-                //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  //  color: Colors.blue,
-                ),
-                elevation: 2.0,
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddVaccinePage()))
+                  .whenComplete(() => setState(() {
+                        _vaccinesFuture = VaccineService().getVaccines();
+                      }));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[800],
+              // padding:
+              //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                //  color: Colors.blue,
               ),
-
               elevation: 2.0,
             ),
-
+            child:
+                const Text("Aşı Ekle", style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
