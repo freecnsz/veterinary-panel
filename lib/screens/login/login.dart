@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          "Yakında Gelecek!",
+                                          "Will be available soon!",
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context)
                                               .textTheme
@@ -270,8 +270,7 @@ class _LoginPageState extends State<LoginPage> {
                                             color: Colors.amber)))),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                login(AuthenticateService()
-                                    .login(_email, _password));
+                                login();
                               }
                             },
                             child: Text(
@@ -299,14 +298,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // Function to login
-  void login(Future<UserModel> logInFuture) async {
+  void login() async {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) {
         // handle the states of login process
         return FutureBuilder(
-            future: logInFuture,
+            future: AuthenticateService().login(_email, _password),
             builder: (context, AsyncSnapshot<UserModel> snap) {
               if (snap.hasData && snap.data!.succeeded!) {
                 // call the function to save the token to local memory if the user wants to stay signed in
@@ -353,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         1,
                       ),
-                      title: const Text("Giriş Yapılamadı!"),
+                      title: const Text("Giriş Başarısız!"),
                       children: [
                         SizedBox(
                           height: 100,
@@ -365,7 +364,7 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: const Text("Tamam"),
+                                child: const Text("Ok"),
                               ),
                             ],
                           ),
