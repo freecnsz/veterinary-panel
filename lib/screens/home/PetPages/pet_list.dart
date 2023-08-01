@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/models/get_pets_model.dart';
 import 'package:flutter_boilerplate/screens/petDetails/pet_details.dart';
+import 'package:flutter_boilerplate/searchbar.dart';
 import 'package:flutter_boilerplate/services/get_pets_service.dart';
 
 class AllPetsPage extends StatefulWidget {
@@ -40,12 +41,13 @@ class AllPetsPageState extends State<AllPetsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        // title: SearchBar(
-        //   searchTerms: searchTerms,
-        // ),
+        title: SearchBar(
+          searchTerms: searchTerms,
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
+      //drawer: const DrawerMenu(),
       body: FutureBuilder<PetsModel>(
         future: _futurePets,
         builder: (context, snapshot) {
@@ -67,14 +69,13 @@ class AllPetsPageState extends State<AllPetsPage> {
                         backgroundImage: Image.memory(
                       photo,
                     ).image),
-                    // ignore: prefer_interpolation_to_compose_strings
                     title: Text(
                       snapshot.data!.data![index].name.toString(),
                       style: const TextStyle(color: Colors.black),
                     ),
                     tileColor: index.isOdd ? oddItemColor : evenItemColor,
                     subtitle: Text(
-                        snapshot.data!.data![index].petTypeName.toString(),
+                        snapshot.data!.data![index].breedName.toString(),
                         style: const TextStyle(color: Colors.black)),
                     trailing: IconButton(
                       onPressed: () {

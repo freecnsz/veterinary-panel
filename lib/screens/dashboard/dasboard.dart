@@ -188,9 +188,12 @@ class _DashboardState extends State<Dashboard> {
                           child: Center(
                             child: Column(
                               children: [
-                                const ListTile(
-                                  leading: Icon(Icons.pets),
-                                  title: Text("Toplam Kedi Sayısı"),
+                                ListTile(
+                                  leading: const Icon(Icons.pets),
+                                  title: const Text("Toplam Kedi Sayısı"),
+                                  subtitle: Text(numberOfDogs.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 30, color: Colors.white)),
                                 ),
                                 Text(numberOfCats.toString(),
                                     style: TextStyle(
