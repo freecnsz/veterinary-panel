@@ -91,6 +91,7 @@ class _DashboardState extends State<Dashboard> {
                         const SizedBox(width: 10),
                         IconButton(
                             onPressed: () {},
+
                             icon: const Icon(Icons.notifications)),
                         const Icon(Icons.person),
                         Padding(
