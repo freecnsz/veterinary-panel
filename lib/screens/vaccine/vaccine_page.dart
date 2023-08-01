@@ -24,36 +24,40 @@ class _VaccinePageState extends State<VaccinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Aşı Listesi'),
+        title: Text('Aşı Listesi'),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () {
-        //     //    Navigator.pop(context);
+        //       Navigator.pop(context);
         //   },
         // ),
         actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AddVaccinePage()))
-                  .whenComplete(() => setState(() {
-                        _vaccinesFuture = VaccineService().getVaccines();
-                      }));
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue[800],
-              // padding:
-              //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                //  color: Colors.blue,
+          Container(
+            // margin: const EdgeInsets.all(45),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddVaccinePage()))
+                    .whenComplete(() => setState(() {
+                          _vaccinesFuture = VaccineService().getVaccines();
+                        }));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue[800],
+                // padding:
+                //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  //  color: Colors.blue,
+                ),
+                elevation: 2.0,
               ),
+
               elevation: 2.0,
             ),
-            child: const Text("Aşı Ekle"),
+
           ),
         ],
       ),
@@ -74,6 +78,7 @@ class _VaccinePageState extends State<VaccinePage> {
                         title: ListTile(
                           //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
                           title: Text("${snapshot.data!.data![index].name}"),
+
                           subtitle:
                               Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(

@@ -1,4 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SPService {
   // Function to save the token to local memory
@@ -18,3 +17,4 @@ class SPService {
     prefs.remove('token');
   }
 }
+

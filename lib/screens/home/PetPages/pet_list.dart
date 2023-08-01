@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/drawer/drawer.dart';
@@ -45,7 +46,7 @@ class AllPetsPageState extends State<AllPetsPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      drawer: const DrawerMenu(),
+      //drawer: const DrawerMenu(),
       body: FutureBuilder<PetsModel>(
         future: _futurePets,
         builder: (context, snapshot) {
@@ -53,17 +54,26 @@ class AllPetsPageState extends State<AllPetsPage> {
             return ListView.builder(
               itemCount: snapshot.data!.data!.length,
               itemBuilder: (context, index) {
+                var pic;
+                snapshot.data!.data![index].petImage != null
+                    ? pic = snapshot.data!.data![index].petImage
+                    : pic = "";
+                var photo = base64Decode(pic);
                 searchTerms.add(snapshot.data!.data![index].name.toString());
                 return Card(
                   color: Colors.white,
                   elevation: 10,
                   child: ListTile(
-                    leading: Icon(
-                      Icons.pets,
-                      color: snapshot.data!.data![index].status == false
-                          ? Colors.grey
-                          : Colors.orange,
-                    ),
+                    leading: CircleAvatar(
+                        backgroundImage: Image.memory(
+                      photo,
+                    ).image),
+                    // leading: Icon(
+                    //   Icons.pets,
+                    //   color: snapshot.data!.data![index].status == false
+                    //       ? Colors.grey
+                    //       : Colors.orange,
+                    // ),
                     // ignore: prefer_interpolation_to_compose_strings
                     title: Text(
                       snapshot.data!.data![index].name.toString(),
@@ -93,7 +103,7 @@ class AllPetsPageState extends State<AllPetsPage> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return const CircularProgressIndicator();
+          return Center(child: const CircularProgressIndicator());
         },
       ),
     );
