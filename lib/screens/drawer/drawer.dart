@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
+import 'package:flutter_boilerplate/users_page.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -44,7 +45,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
         leading: const Icon(Icons.person),
         title: const Text('MÜŞTERİLER'),
         trailing: const Icon(Icons.arrow_right),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const UsersPage()));
+        },
       ),
       ListTile(
         leading: const Icon(Icons.calendar_month_outlined),
@@ -72,11 +76,37 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          SPService().deleteToken();
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginPage()));
+          _showExitDialog(context);
         },
       ),
     ])));
+  }
+
+  void _showExitDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Çıkış Yap'),
+        content: const Text('Çıkış yapmak istediğinizden emin misiniz?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Dialog kutusunu kapat
+            },
+            child: const Text('İptal'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              SPService().deleteToken();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false);
+            },
+            child: const Text('Çıkış Yap'),
+          ),
+        ],
+      ),
+    );
   }
 }

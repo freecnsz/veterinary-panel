@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
