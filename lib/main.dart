@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'screens/home/home_page.dart';
 
 void main() {
@@ -29,6 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      theme: ThemeData.dark().copyWith(
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: Colors.white),
+      ),
       initialRoute: LoginPage.routeName,
       routes: {
         MyHomePage.routeName: (context) =>

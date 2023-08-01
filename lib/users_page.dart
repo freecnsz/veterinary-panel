@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/screens/home/PetPages/pet_list.dart';
+import 'package:flutter_boilerplate/searchbar.dart';
+import 'package:flutter_boilerplate/user_model.dart';
+import 'package:flutter_boilerplate/users_service.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -97,4 +102,3 @@ class UsersPageState extends State<UsersPage> {
     );
   }
 }
-

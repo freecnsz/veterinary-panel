@@ -308,7 +308,7 @@ class _PetDetailsState extends State<PetDetails> {
                               style: TextStyle(color: Colors.black)),
                           children: [
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment:
