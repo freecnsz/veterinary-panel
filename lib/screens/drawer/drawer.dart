@@ -76,9 +76,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          SPService().deleteToken();
+SPService().deleteToken();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const LoginPage()));
+
         },
       ),
       // ExpansionTile(
@@ -94,5 +95,32 @@ class _DrawerMenuState extends State<DrawerMenu> {
       //   ],
       // )
     ])));
+  }
+
+  void _showExitDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Çıkış Yap'),
+        content: const Text('Çıkış yapmak istediğinizden emin misiniz?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Dialog kutusunu kapat
+            },
+            child: const Text('İptal'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false);
+            },
+            child: const Text('Çıkış Yap'),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+
 class SPService {
   static const _key = "token";
   get _secureStorage =>
@@ -20,3 +21,4 @@ class SPService {
     await _secureStorage.delete(key: _key);
   }
 }
+
