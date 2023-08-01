@@ -31,21 +31,22 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(42, 45, 61, 1),
-        title: const Text("E-PAW"),
+        backgroundColor: Colors.amber,
+        title: const Text("E-PAW",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         actions: [
           Center(
             child: Row(children: [
-              Text(
-                "${TimeOfDay.now().hour}:${TimeOfDay.now().minute}",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
+              Text("${TimeOfDay.now().hour}:${TimeOfDay.now().minute}",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
               const SizedBox(width: 15),
               Padding(
                 padding: EdgeInsets.all(defaultPadding),
                 child: Text(
                   "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
             ]),
