@@ -19,10 +19,7 @@ class _SearchBarState extends State<SearchBar> {
       width: currentWidth - 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          width: 0.5,
-          color: Colors.grey,
-        ),
+        color: Colors.white,
       ),
       child: TextButton(
         onPressed: () {
@@ -33,7 +30,7 @@ class _SearchBarState extends State<SearchBar> {
         child: const Text(
           "Search",
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),

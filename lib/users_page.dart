@@ -1,8 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/screens/home/PetPages/pet_list.dart';
-import 'package:flutter_boilerplate/searchbar.dart';
-import 'package:flutter_boilerplate/user_model.dart';
-import 'package:flutter_boilerplate/users_service.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -27,7 +22,6 @@ class UsersPageState extends State<UsersPage> {
       appBar: AppBar(
         centerTitle: true,
         title: SearchBar(searchTerms: searchTerms),
-        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: FutureBuilder<User>(
@@ -42,7 +36,6 @@ class UsersPageState extends State<UsersPage> {
                   searchTerms.add(
                       "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}");
                 }
-
                 if (snapshot.data!.data![index].financialAccountName != "") {
                   return Card(
                     color: Colors.white,
@@ -83,10 +76,10 @@ class UsersPageState extends State<UsersPage> {
                               IconData(0xe4a1, fontFamily: 'MaterialIcons'),
                               color: Colors.orange),
                           onPressed: () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) =>  AllPetsPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AllPetsPage()));
                           },
                         )),
                   );
@@ -98,9 +91,10 @@ class UsersPageState extends State<UsersPage> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
   }
 }
+
