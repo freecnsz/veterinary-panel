@@ -41,9 +41,9 @@ class AllPetsPageState extends State<AllPetsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: SearchBar(
-          searchTerms: searchTerms,
-        ),
+        // title: SearchBar(
+        //   searchTerms: searchTerms,
+        // ),
         elevation: 0,
       ),
       body: FutureBuilder<PetsModel>(

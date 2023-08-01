@@ -13,13 +13,12 @@ class VaccinePage extends StatefulWidget {
 }
 
 class _VaccinePageState extends State<VaccinePage> {
-
   late Future<VaccineModel> _vaccinesFuture;
 
   String petId = "";
   String vaccineId = "";
   DateTime? date = DateTime.now();
- // Date date = DateTime.now();
+  // Date date = DateTime.now();
   String clinic = "";
 
   @override
@@ -86,7 +85,6 @@ class _VaccinePageState extends State<VaccinePage> {
                           subtitle:
                               Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(
-                            onPressed: () {},
                             icon: const Icon(Icons.add),
                             onPressed: () {
                               Navigator.push(
@@ -96,8 +94,8 @@ class _VaccinePageState extends State<VaccinePage> {
                                           const VaccinePage())).whenComplete(
                                 () => setState(
                                   () {
-                                  date = DateTime.now(); 
-                                  clinic = "";
+                                    date = DateTime.now();
+                                    clinic = "";
                                     _vaccinesFuture = VaccineService()
                                         .createPetVaccine(
                                             petId, vaccineId, date!, clinic);
@@ -132,54 +130,53 @@ class _VaccinePageState extends State<VaccinePage> {
                                                 labelText:
                                                     'Klinik İsmini Yazınız',
                                                 border: OutlineInputBorder(),
-                                              ),  
+                                              ),
                                             ),
                                             SizedBox(
                                               height: 10,
                                             ),
-
                                             Center(
                                               child: Container(
-                                            
                                                 width: 350,
                                                 height: 30,
                                                 margin: EdgeInsets.all(10),
                                                 child: ElevatedButton(
-                                                    
                                                     onPressed: () {
                                                       _selectDate(context);
-                                                      
                                                     },
-                                                    style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.white, // Buton rengi
-                                                    foregroundColor: Colors.blue, // Kenar rengi
-                                                    shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(8.0), // Kenar yuvarlatma
-                                                                              ),
-                                                                                ),
-                                                    child: Text("Aşı Tarihi",)),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor: Colors
+                                                          .white, // Buton rengi
+                                                      foregroundColor: Colors
+                                                          .blue, // Kenar rengi
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                8.0), // Kenar yuvarlatma
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      "Aşı Tarihi",
+                                                    )),
                                               ),
                                             ),
-                                              
                                             ElevatedButton(
                                                 onPressed: () {
-
-                                              //    Navigator.pop(context);
-                                                      showCreate(VaccineService().createPetVaccine(
-                                                        
+                                                  //    Navigator.pop(context);
+                                                  showCreate(VaccineService()
+                                                      .createPetVaccine(
                                                           petId,
                                                           vaccineId,
                                                           date!,
-                                                          clinic  
-                                                    )
-                          ); 
+                                                          clinic));
                                                 },
                                                 child: Text("Ekle"))
                                           ],
                                         ),
                                       ));
                             },
-                            icon: Icon(Icons.add),
                             color: Colors.blue,
 
                             //create simple dialog if success
@@ -266,13 +263,9 @@ class _VaccinePageState extends State<VaccinePage> {
     );
   }
 
+  DateTime _selectedDate = DateTime.now();
 
-
-
-DateTime _selectedDate = DateTime.now(); 
-
-
-Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: _selectedDate,
@@ -283,23 +276,5 @@ Future<void> _selectDate(BuildContext context) async {
         _selectedDate = picked;
       });
     }
-  } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 }
