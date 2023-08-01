@@ -16,16 +16,17 @@ class AllPetsPage extends StatefulWidget {
 class AllPetsPageState extends State<AllPetsPage> {
   late Future<PetsModel> _futurePets;
   late List<String> searchTerms;
+
   late String tokenID;
 
   static Map<String, String> token = {
     HttpHeaders.contentTypeHeader: 'application/json',
-    HttpHeaders.authorizationHeader: 'Bearer '
+    HttpHeaders.authorizationHeader:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiMjU4MzgzZGMtYjY1Ni00NWExLTg4ZjUtYTJhODA2N2ZlMDkwIiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTUyNzQ4OCwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.T5S3JRXgkcK8ey-qygEmNAXmKm6VcZZ9oYP10r9NnoE'
   };
 
   @override
   void initState() {
-    tokenID = "";
     _futurePets = PetService.getPets(token);
     searchTerms = [];
     super.initState();
