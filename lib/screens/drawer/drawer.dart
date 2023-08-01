@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/screens/login/login.dart';
+import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 import 'package:flutter_boilerplate/users_page.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -75,7 +76,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
         title: const Text('Çıkış yap'),
         trailing: const Icon(Icons.arrow_right),
         onTap: () {
-          _showExitDialog(context);
+SPService().deleteToken();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginPage()));
+
         },
       ),
       // ExpansionTile(
