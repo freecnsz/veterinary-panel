@@ -197,8 +197,6 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             style: const TextStyle(color: Colors.black),
                             obscureText: passwordVisible,
-                            onFieldSubmitted: (value) => login(),
-                            textInputAction: TextInputAction.go,
                             onFieldSubmitted: (value) {
                               if (_formKey.currentState!.validate()) {
                                 login();
