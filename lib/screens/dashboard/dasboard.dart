@@ -95,26 +95,7 @@ class _DashboardState extends State<Dashboard> {
               child: SizedBox(
                 child: Row(
                   children: [
-                    Container(
-                      width: 250,
-                      height: 110,
-                      decoration: cardDecoration,
-                      child: Center(
-                        child: Column(
-                          children: const [
-                            ListTile(
-                              leading: Icon(Icons.pending_actions_outlined),
-                              title: Text("Günlük Beklenen Randevular"),
-                              subtitle: Text("5",
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.white)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(defaultPadding),
+                    Expanded(
                       child: Container(
                         width: 250,
                         height: 110,
@@ -123,9 +104,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Column(
                             children: const [
                               ListTile(
-                                leading: Icon(Icons.check_circle_outline),
-                                title: Text("Günlük Geçen Randevular"),
-                                subtitle: Text("3",
+                                leading: Icon(Icons.pending_actions_outlined),
+                                title: Text("Günlük Beklenen Randevular"),
+                                subtitle: Text("5",
                                     style: TextStyle(
                                         fontSize: 30, color: Colors.white)),
                               ),
@@ -134,23 +115,48 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(defaultPadding),
-                      child: Container(
-                        width: 250,
-                        height: 110,
-                        decoration: cardDecoration,
-                        child: Center(
-                          child: Column(
-                            children: const [
-                              ListTile(
-                                leading: Icon(Icons.monetization_on),
-                                title: Text("Günlük Ciro"),
-                                subtitle: Text("0,00 ₺ ",
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white)),
-                              ),
-                            ],
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(defaultPadding),
+                        child: Container(
+                          width: 250,
+                          height: 110,
+                          decoration: cardDecoration,
+                          child: Center(
+                            child: Column(
+                              children: const [
+                                ListTile(
+                                  leading: Icon(Icons.check_circle_outline),
+                                  title: Text("Günlük Geçen Randevular"),
+                                  subtitle: Text("3",
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(defaultPadding),
+                        child: Container(
+                          width: 250,
+                          height: 110,
+                          decoration: cardDecoration,
+                          child: Center(
+                            child: Column(
+                              children: const [
+                                ListTile(
+                                  leading: Icon(Icons.monetization_on),
+                                  title: Text("Günlük Ciro"),
+                                  subtitle: Text("0,00 ₺ ",
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -164,81 +170,7 @@ class _DashboardState extends State<Dashboard> {
               child: SizedBox(
                   child: Row(
                 children: [
-                  Container(
-                    width: 510,
-                    height: 300,
-                    decoration: cardDecoration2,
-                    child: Column(
-                      children: [
-                        Container(
-                          child: const ListTile(
-                            leading: Icon(
-                              Icons.replay,
-                              color: Colors.black,
-                            ),
-                            title: Text("Geçmiş Randevular",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                        ),
-                        const Divider(),
-                        DataTable(columns: const [
-                          DataColumn(
-                              label: Text(
-                            "Sahip Adı",
-                          )),
-                          DataColumn(
-                              label: Text(
-                            "Hasta Adı",
-                          )),
-                          DataColumn(
-                              label: Text(
-                            "Randevu Tarihi",
-                          )),
-                        ], rows: const [
-                          DataRow(
-                            cells: <DataCell>[
-                              DataCell(Text('Cansu Fidan',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('Paşa',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('19.03.2023',
-                                  style: TextStyle(color: Colors.black))),
-                            ],
-                          ),
-                          DataRow(
-                            cells: <DataCell>[
-                              DataCell(Text('Çağlar Ferdi',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('Boncuk',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('19.03.2023',
-                                  style: TextStyle(color: Colors.black))),
-                            ],
-                          ),
-                          DataRow(
-                            cells: <DataCell>[
-                              DataCell(Text('Ali Veli',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('Kara',
-                                  style: TextStyle(color: Colors.black))),
-                              DataCell(Text('19.03.2023',
-                                  style: TextStyle(color: Colors.black))),
-                            ],
-                          ),
-                        ]),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Daha fazla göster",
-                            style: TextStyle(color: Colors.blue.shade900),
-                            textAlign: TextAlign.end,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(defaultPadding),
+                  Expanded(
                     child: Container(
                       width: 510,
                       height: 300,
@@ -248,10 +180,10 @@ class _DashboardState extends State<Dashboard> {
                           Container(
                             child: const ListTile(
                               leading: Icon(
-                                Icons.refresh_outlined,
+                                Icons.replay,
                                 color: Colors.black,
                               ),
-                              title: Text("Gelecek Randevular",
+                              title: Text("Geçmiş Randevular",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                             ),
@@ -264,7 +196,7 @@ class _DashboardState extends State<Dashboard> {
                             )),
                             DataColumn(
                                 label: Text(
-                              "Hasta Türü",
+                              "Hasta Adı",
                             )),
                             DataColumn(
                                 label: Text(
@@ -297,10 +229,8 @@ class _DashboardState extends State<Dashboard> {
                                     style: TextStyle(color: Colors.black))),
                                 DataCell(Text('Kara',
                                     style: TextStyle(color: Colors.black))),
-                                DataCell(Text(
-                                  '19.03.2023',
-                                  style: TextStyle(color: Colors.black),
-                                )),
+                                DataCell(Text('19.03.2023',
+                                    style: TextStyle(color: Colors.black))),
                               ],
                             ),
                           ]),
@@ -313,6 +243,87 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(defaultPadding),
+                      child: Container(
+                        width: 510,
+                        height: 300,
+                        decoration: cardDecoration2,
+                        child: Column(
+                          children: [
+                            Container(
+                              child: const ListTile(
+                                leading: Icon(
+                                  Icons.refresh_outlined,
+                                  color: Colors.black,
+                                ),
+                                title: Text("Gelecek Randevular",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            const Divider(),
+                            DataTable(columns: const [
+                              DataColumn(
+                                  label: Text(
+                                "Sahip Adı",
+                              )),
+                              DataColumn(
+                                  label: Text(
+                                "Hasta Türü",
+                              )),
+                              DataColumn(
+                                  label: Text(
+                                "Randevu Tarihi",
+                              )),
+                            ], rows: const [
+                              DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text('Cansu Fidan',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text('Paşa',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text('19.03.2023',
+                                      style: TextStyle(color: Colors.black))),
+                                ],
+                              ),
+                              DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text('Çağlar Ferdi',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text('Boncuk',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text('19.03.2023',
+                                      style: TextStyle(color: Colors.black))),
+                                ],
+                              ),
+                              DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text('Ali Veli',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text('Kara',
+                                      style: TextStyle(color: Colors.black))),
+                                  DataCell(Text(
+                                    '19.03.2023',
+                                    style: TextStyle(color: Colors.black),
+                                  )),
+                                ],
+                              ),
+                            ]),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Daha fazla göster",
+                                style: TextStyle(color: Colors.blue.shade900),
+                                textAlign: TextAlign.end,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )

@@ -6,8 +6,7 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  static const String routeName = '/myHomePage';
-
+  static const String routeName = '/HomePage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

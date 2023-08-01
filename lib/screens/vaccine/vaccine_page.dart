@@ -24,7 +24,6 @@ class _VaccinePageState extends State<VaccinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
         title: Text('Aşı Listesi'),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
@@ -56,7 +55,9 @@ class _VaccinePageState extends State<VaccinePage> {
                 ),
                 elevation: 2.0,
               ),
+              elevation: 2.0,
             ),
+
           ),
         ],
       ),
@@ -77,11 +78,11 @@ class _VaccinePageState extends State<VaccinePage> {
                         title: ListTile(
                           //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
                           title: Text("${snapshot.data!.data![index].name}"),
-                          subtitle: Text(
-                              "${snapshot.data!.data![index].productName!}"),
+                          subtitle:
+                              Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             color: Colors.blue,
                           ),
                         ),

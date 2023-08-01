@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter_boilerplate/models/pet_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
