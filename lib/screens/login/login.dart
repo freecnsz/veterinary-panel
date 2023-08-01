@@ -194,7 +194,9 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 20),
                           TextFormField(
                             style: const TextStyle(color: Colors.black),
+                            textInputAction: TextInputAction.go,
                             obscureText: passwordVisible,
+                            onFieldSubmitted: (value) => login(),
                             decoration: InputDecoration(
                               focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.amber)),
@@ -315,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        "Succesfully loged in!",
+                        "Giriş Başarılı!",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline6?.copyWith(
                               color: Colors.white,
@@ -350,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         1,
                       ),
-                      title: const Text("Login failed!"),
+                      title: const Text("Giriş Başarısız!"),
                       children: [
                         SizedBox(
                           height: 100,
@@ -373,7 +375,7 @@ class _LoginPageState extends State<LoginPage> {
                 );
               } else if (snap.hasError) {
                 return SimpleDialog(
-                  title: const Text("There is an issue with connection!"),
+                  title: const Text("Bağlantı Hatası!"),
                   children: [
                     Text("Error: ${snap.error.toString()}"),
                     ElevatedButton(

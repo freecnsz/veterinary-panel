@@ -91,6 +91,7 @@ class _DashboardState extends State<Dashboard> {
                         const SizedBox(width: 10),
                         IconButton(
                             onPressed: () {},
+
                             icon: const Icon(Icons.notifications)),
                         const Icon(Icons.person),
                         Padding(
@@ -188,12 +189,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Center(
                             child: Column(
                               children: [
-                                ListTile(
-                                  leading: const Icon(Icons.pets),
-                                  title: const Text("Toplam Kedi Sayısı"),
-                                  subtitle: Text(numberOfDogs.toString(),
-                                      style: const TextStyle(
-                                          fontSize: 30, color: Colors.white)),
+                                const ListTile(
+                                  leading: Icon(Icons.pets),
+                                  title: Text("Toplam Kedi Sayısı"),
                                 ),
                                 Text(numberOfCats.toString(),
                                     style: TextStyle(

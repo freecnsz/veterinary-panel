@@ -43,7 +43,7 @@ class CustomSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             result,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
           ),
         );
       },
@@ -65,7 +65,7 @@ class CustomSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             result,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
           ),
         );
       },
