@@ -45,7 +45,8 @@ class _PetDetailsState extends State<PetDetails> {
       appBar: AppBar(
         title: const Text('Hayvan Detayları'),
       ),
-      body: SizedBox(
+      body: Container(
+        color: Colors.white,
         height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -62,6 +63,7 @@ class _PetDetailsState extends State<PetDetails> {
                     : pic = "";
                 var photo = base64Decode(pic);
                 return Card(
+                  color: Colors.grey.shade300,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   elevation: 5,
@@ -130,7 +132,11 @@ class _PetDetailsState extends State<PetDetails> {
                                             color: Colors.pink)
                                         : const Icon(Icons.male,
                                             color: Colors.blue),
-                                    Text(snapshot.data!.data!.name.toString()),
+                                    Text(
+                                      snapshot.data!.data!.name.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                    ),
                                     const SizedBox(
                                       width: 20,
                                     ),
@@ -172,13 +178,20 @@ class _PetDetailsState extends State<PetDetails> {
                                 verticalDirection: VerticalDirection.down,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text("Doğum Tarihi: "),
+                                  const Text("Doğum Tarihi: ",
+                                      style: TextStyle(color: Colors.black)),
                                   const SizedBox(
                                     width: 50,
                                   ),
-                                  const Icon(Icons.cake_outlined),
-                                  Text(inputFormat
-                                      .format(snapshot.data!.data!.dob!)),
+                                  const Icon(
+                                    Icons.cake_outlined,
+                                    color: Colors.black,
+                                  ),
+                                  Text(
+                                      inputFormat
+                                          .format(snapshot.data!.data!.dob!),
+                                      style:
+                                          const TextStyle(color: Colors.black)),
                                 ],
                               ),
                             ),
@@ -200,22 +213,30 @@ class _PetDetailsState extends State<PetDetails> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    const Text("Hayvan Türü"),
+                                    const Text("Hayvan Türü",
+                                        style: TextStyle(color: Colors.black)),
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    Text(snapshot.data!.data!.petTypeName
-                                        .toString()),
+                                    Text(
+                                        snapshot.data!.data!.petTypeName
+                                            .toString(),
+                                        style: const TextStyle(
+                                            color: Colors.black)),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    const Text("Cins Türü"),
+                                    const Text("Cins Türü",
+                                        style: TextStyle(color: Colors.black)),
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    Text(snapshot.data!.data!.breedName
-                                        .toString()),
+                                    Text(
+                                        snapshot.data!.data!.breedName
+                                            .toString(),
+                                        style: const TextStyle(
+                                            color: Colors.black)),
                                   ],
                                 ),
                               ],
@@ -234,9 +255,12 @@ class _PetDetailsState extends State<PetDetails> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text("Kısırlaştırılmış"),
+                                const Text("Kısırlaştırılmış",
+                                    style: TextStyle(color: Colors.black)),
                                 snapshot.data!.data!.neutered == false
                                     ? Checkbox(
+                                        fillColor: MaterialStateProperty.all(
+                                            Colors.black),
                                         hoverColor: Colors.transparent,
                                         mouseCursor: MouseCursor.defer,
                                         focusColor: Colors.transparent,
@@ -266,6 +290,7 @@ class _PetDetailsState extends State<PetDetails> {
                         ),
                         Center(
                           child: IconButton(
+                              color: Colors.black,
                               iconSize: 32,
                               onPressed: () {
                                 Navigator.push(
@@ -277,7 +302,10 @@ class _PetDetailsState extends State<PetDetails> {
                               icon: const Icon(Icons.vaccines)),
                         ),
                         ExpansionTile(
-                          title: const Text("Detaylar"),
+                          collapsedIconColor: Colors.black,
+                          iconColor: Colors.black,
+                          title: const Text("Detaylar",
+                              style: TextStyle(color: Colors.black)),
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -286,13 +314,17 @@ class _PetDetailsState extends State<PetDetails> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: const [
-                                    Text("Aşı Adı"),
+                                    Text("Aşı Adı",
+                                        style: TextStyle(color: Colors.black)),
                                     SizedBox(
                                       width: 2,
                                     ),
-                                    Text("Aşı Tarihi"),
-                                    Text("Klinik"),
-                                    Text("Ürün Adı"),
+                                    Text("Aşı Tarihi",
+                                        style: TextStyle(color: Colors.black)),
+                                    Text("Klinik",
+                                        style: TextStyle(color: Colors.black)),
+                                    Text("Ürün Adı",
+                                        style: TextStyle(color: Colors.black)),
                                   ],
                                 ),
                                 const SizedBox(
@@ -326,24 +358,41 @@ class _PetDetailsState extends State<PetDetails> {
                                                             .toString(),
                                                         style: const TextStyle(
                                                             color:
-                                                                Colors.white),
+                                                                Colors.black),
                                                       ),
                                                       const SizedBox(
                                                         width: 2,
                                                       ),
-                                                      Text(dateFormat.format(
+                                                      Text(
+                                                          dateFormat.format(
+                                                              snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .date!),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black)),
+                                                      Text(
                                                           snapshot
                                                               .data!
                                                               .data![index]
-                                                              .date!)),
-                                                      Text(snapshot.data!
-                                                          .data![index].clinic
-                                                          .toString()),
-                                                      Text(snapshot
-                                                          .data!
-                                                          .data![index]
-                                                          .productName
-                                                          .toString()),
+                                                              .clinic
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black)),
+                                                      Text(
+                                                          snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .productName
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black)),
                                                     ],
                                                   ),
                                                   Padding(
