@@ -194,8 +194,8 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 20),
                           TextFormField(
                             style: const TextStyle(color: Colors.black),
-                            obscureText: passwordVisible,
                             textInputAction: TextInputAction.go,
+                            obscureText: passwordVisible,
                             onFieldSubmitted: (value) => login(),
                             decoration: InputDecoration(
                               focusedBorder: const OutlineInputBorder(
