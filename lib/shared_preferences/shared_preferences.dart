@@ -11,9 +11,7 @@ class SPService {
   }
 
   // Get the encrypted token from secure storage
-  Future<String?> getToken() async {
-    return await _secureStorage.read(key: _key);
-  }
+  String get token => _secureStorage.read(key: _key);
 
   // Delete the token from secure storage
   Future<void> deleteToken() async {
