@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
@@ -196,7 +198,11 @@ class _LoginPageState extends State<LoginPage> {
                             style: const TextStyle(color: Colors.black),
                             obscureText: passwordVisible,
                             textInputAction: TextInputAction.go,
-                            onFieldSubmitted: (value) => login(),
+                            onFieldSubmitted: (value) {
+                              if (_formKey.currentState!.validate()) {
+                                login();
+                              }
+                            },
                             decoration: InputDecoration(
                               focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.amber)),
