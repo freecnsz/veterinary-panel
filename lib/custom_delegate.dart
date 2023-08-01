@@ -13,6 +13,7 @@ class CustomSearchDelegate extends SearchDelegate {
         },
         icon: const Icon(
           Icons.clear,
+          color: Colors.black,
         ),
       ),
     ];
@@ -24,7 +25,10 @@ class CustomSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, "");
       },
-      icon: const Icon(Icons.arrow_back),
+      icon: const Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+      ),
     );
   }
 
@@ -41,9 +45,10 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(
-            result,
-          ),
+          title: Text(result,
+              style: const TextStyle(
+                color: Colors.black,
+              )),
         );
       },
     );
@@ -62,9 +67,10 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(
-            result,
-          ),
+          title: Text(result,
+              style: const TextStyle(
+                color: Colors.black,
+              )),
         );
       },
     );
