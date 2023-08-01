@@ -45,10 +45,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
         leading: const Icon(Icons.person),
         title: const Text('MÜŞTERİLER'),
         trailing: const Icon(Icons.arrow_right),
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const UsersPage()));
-        },
+        onTap: () {},
       ),
       ListTile(
         leading: const Icon(Icons.calendar_month_outlined),
