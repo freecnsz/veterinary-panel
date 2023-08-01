@@ -1,9 +1,10 @@
-import 'dart:convert';
 // To parse this JSON data, do
 //
-//     final vaccineModel = vaccineModelFromJson(jsonString);
+//     final petVaccineModel = petVaccineModelFromJson(jsonString);
 
-class VaccineModel {
+import 'dart:convert';
+
+class PetVaccineModel {
   int? pageNumber;
   int? pageSize;
   int? recordsFiltered;
@@ -18,9 +19,9 @@ class VaccineModel {
   bool? succeeded;
   dynamic message;
   dynamic errors;
-  List<Datum>? data;
+  List<Data>? data;
 
-  VaccineModel({
+  PetVaccineModel({
     this.pageNumber,
     this.pageSize,
     this.recordsFiltered,
@@ -38,12 +39,13 @@ class VaccineModel {
     this.data,
   });
 
-  factory VaccineModel.fromRawJson(String str) =>
-      VaccineModel.fromJson(json.decode(str));
+  factory PetVaccineModel.fromRawJson(String str) =>
+      PetVaccineModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory VaccineModel.fromJson(Map<String, dynamic> json) => VaccineModel(
+  factory PetVaccineModel.fromJson(Map<String, dynamic> json) =>
+      PetVaccineModel(
         pageNumber: json["pageNumber"],
         pageSize: json["pageSize"],
         recordsFiltered: json["recordsFiltered"],
@@ -60,7 +62,7 @@ class VaccineModel {
         errors: json["errors"],
         data: json["data"] == null
             ? []
-            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+            : List<Data>.from(json["data"]!.map((x) => Data.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,68 +86,38 @@ class VaccineModel {
       };
 }
 
-class Datum {
+class Data {
   int? id;
   String? name;
   String? productName;
+  DateTime? date;
+  String? clinic;
 
-  Datum({
+  Data({
     this.id,
     this.name,
     this.productName,
+    this.date,
+    this.clinic,
   });
 
-  factory Datum.fromRawJson(String str) => Datum.fromJson(json.decode(str));
+  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         name: json["name"],
         productName: json["productName"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        clinic: json["clinic"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "productName": productName,
+        "date": date?.toIso8601String(),
+        "clinic": clinic,
       };
-}
-
-
-
-
-
-
-
-class Vaccine2Model {
-    bool? succeeded;
-    String? message;
-    List<String>? errors;
-    dynamic data;
-
-    Vaccine2Model({
-        this.succeeded,
-        this.message,
-        this.errors,
-        this.data,
-    });
-
-    factory Vaccine2Model.fromRawJson(String str) => Vaccine2Model.fromJson(json.decode(str));
-
-    String toRawJson() => json.encode(toJson());
-
-    factory Vaccine2Model.fromJson(Map<String, dynamic> json) => Vaccine2Model(
-        succeeded: json["Succeeded"],
-        message: json["Message"],
-        errors: json["Errors"] == null ? [] : List<String>.from(json["Errors"]!.map((x) => x)),
-        data: json["Data"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "Succeeded": succeeded,
-        "Message": message,
-        "Errors": errors == null ? [] : List<dynamic>.from(errors!.map((x) => x)),
-        "Data": data,
-    };
 }

@@ -3,11 +3,6 @@ import 'package:flutter_boilerplate/models/get_pets_model.dart';
 import 'package:http/http.dart' as http;
 
 class PetService {
-  //servislerde bu aşamada http url kullanılsın.
-  //Bu güvensiz bir protokoldür. Bu yüzden http kullanılmamalıdır.
-  //Ancak kendi bilgisayarımıza bağlanmamızdan bu durum önem arz etmez.
-
-  //Base Model içinde bir liste döndürür. Bu liste içinde de Tenant yani şirketler bulunmaktadır.
   static Future<PetsModel> getPets(
     Map<String, String>? token,
   ) async {

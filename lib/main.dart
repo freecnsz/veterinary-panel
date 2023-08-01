@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
+import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
+import 'package:flutter_boilerplate/screens/login/login.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'constants.dart';
-import 'screens/dashboard/dasboard.dart';
-import 'services/product_service/providers/product_provider.dart';
+import 'screens/home/home_page.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -33,19 +31,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
-      ),
-      // initialRoute: Dashboard.routeName,
-      // routes: {
-      //   Dashboard.routeName: (context) => const Dashboard(),
-    //}
-
-
-      home: VaccinePage(), 
+      initialRoute: LoginPage.routeName,
+      routes: {
+        MyHomePage.routeName: (context) =>
+            const MyHomePage(title: 'Flutter Demo Home Page'),
+        LoginPage.routeName: (context) => const LoginPage(),
+      },
     );
   }
 }
