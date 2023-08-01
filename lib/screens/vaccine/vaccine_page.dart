@@ -24,16 +24,14 @@ class _VaccinePageState extends State<VaccinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Aşı Listesi'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            //    Navigator.pop(context);
-          },
-        ),
+        title: Text('Aşı Listesi'),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //       Navigator.pop(context);
+        //   },
+        // ),
         actions: [
-          // ignore: avoid_unnecessary_containers
           Container(
             // margin: const EdgeInsets.all(45),
             child: ElevatedButton(
@@ -47,7 +45,7 @@ class _VaccinePageState extends State<VaccinePage> {
                         }));
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[800],
+                primary: Colors.blue[800],
                 // padding:
                 //   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 shape: RoundedRectangleBorder(
@@ -56,8 +54,10 @@ class _VaccinePageState extends State<VaccinePage> {
                 ),
                 elevation: 2.0,
               ),
-              child: const Text("Aşı Ekle"),
+
+              elevation: 2.0,
             ),
+
           ),
         ],
       ),
@@ -78,9 +78,9 @@ class _VaccinePageState extends State<VaccinePage> {
                         title: ListTile(
                           //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
                           title: Text("${snapshot.data!.data![index].name}"),
-                          subtitle: Text(
-                              // ignore: unnecessary_string_interpolations
-                              "${snapshot.data!.data![index].productName!}"),
+
+                          subtitle:
+                              Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.add),

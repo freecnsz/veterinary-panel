@@ -1,9 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/models/pet_growth_model.dart';
 import 'package:flutter_boilerplate/models/pet_model.dart';
+import 'package:flutter_boilerplate/models/vaccine_model.dart';
+import 'package:flutter_boilerplate/screens/vaccine/vaccine_page.dart';
 import 'package:flutter_boilerplate/services/pet_growth_service.dart';
+import 'package:flutter_boilerplate/services/product_service/vaccines/vaccine_service.dart';
 import 'package:intl/intl.dart';
 import '../../services/pet_details_service.dart';
 
@@ -25,7 +27,7 @@ petimage
 class _PetDetailsState extends State<PetDetails> {
   late Future<GrowthModel> growth;
   late Future<GrowthModel> growth1;
-
+  late Future<VaccineModel> _vaccinesFuture;
   late Future<PetModel> pet;
 
   @override
@@ -33,6 +35,7 @@ class _PetDetailsState extends State<PetDetails> {
     growth = GrowthService().getEn(widget.id);
     growth1 = GrowthService().getBoy(widget.id);
     pet = PetService().getPetDetails(widget.id);
+    _vaccinesFuture = VaccineService().getVaccines();
     super.initState();
   }
 
@@ -41,12 +44,10 @@ class _PetDetailsState extends State<PetDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
         title: const Text('Hayvan Detayları'),
       ),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
-        color: Colors.grey.shade500,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<PetModel>(
@@ -64,7 +65,6 @@ class _PetDetailsState extends State<PetDetails> {
                 return Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  color: Colors.grey.shade300,
                   elevation: 5,
                   child: SingleChildScrollView(
                     child: Column(
@@ -260,76 +260,75 @@ class _PetDetailsState extends State<PetDetails> {
                           ],
                         ),
                         const SizedBox(
-                          height: 100,
+                          height: 25,
+                        ),
+                        Center(
+                          child: IconButton(
+                              iconSize: 32,
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const VaccinePage()));
+                              },
+                              icon: const Icon(Icons.vaccines)),
+                        ),
+                        const SizedBox(
+                          height: 25,
                         ),
                         ExpansionTile(
                           title: const Text("Detaylar"),
                           children: [
-                            Column(
-                              children: [
-                                FutureBuilder<GrowthModel>(
-                                  future: growth,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData &&
-                                        snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                      // ignore: prefer_typing_uninitialized_variables, unused_local_variable
-                                      var index;
-                                      var now = DateTime.now();
-                                      for (var index = 0;
-                                          index < snapshot.data!.data!.length;
-                                          index++) {
-                                        if (DateFormat('MMMM').format(now) ==
-                                            "July") {
-                                          return Row(
-                                            children: [
-                                              Text(snapshot
-                                                  .data!.data![0].nameOfMonth
-                                                  .toString()),
-                                              Text(snapshot.data!.data![0].value
-                                                  .toString()),
-                                            ],
-                                          );
-                                        }
-                                        return const Text("data");
-                                      }
-                                      return const Text("data");
-                                      // return ListView.builder(
-                                      //   itemCount: snapshot.data!.data!.length,
-                                      //   itemBuilder: (context, index) {
-                                      //     while (index < 1) {
-                                      //       return ListTile(
-                                      //         title: Text(snapshot
-                                      //             .data!.data![1].nameOfMonth
-                                      //             .toString()),
-                                      //       );
-                                      //     }
-                                      //     return Text(snapshot
-                                      //         .data!.data![index].nameOfMonth
-                                      //         .toString());
-                                      //   },
-                                      // );
-                                    } else {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  },
-                                ),
-                                FutureBuilder<GrowthModel>(
-                                  future: growth1,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData &&
-                                        snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                      return const Card();
-                                    } else {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  },
-                                )
-                              ],
-                            )
+                            FutureBuilder<VaccineModel>(
+                              future: _vaccinesFuture,
+                              builder: (context,
+                                  AsyncSnapshot<VaccineModel> snapshot) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data!.succeeded!) {
+                                    return ListView.builder(
+                                      itemCount: snapshot.data!.data!.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            ExpansionTile(
+                                              iconColor: Colors.blue,
+                                              leading: const Icon(
+                                                  Icons.vaccines_outlined,
+                                                  color: Colors.blue),
+                                              title: ListTile(
+                                                //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
+                                                title: Text(
+                                                    "${snapshot.data!.data![index].name}"),
+                                                subtitle: Text(snapshot.data!
+                                                    .data![index].productName!),
+                                                trailing: IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons.add),
+                                                  color: Colors.blue,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    return Center(
+                                      child: Text(snapshot.data!.message!),
+                                    );
+                                  }
+                                } else if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text(snapshot.error.toString()),
+                                  );
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                              },
+                            ),
                           ],
                         ),
                         const SizedBox(
