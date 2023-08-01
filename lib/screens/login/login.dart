@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/screens/dashboard/dasboard.dart';
 import 'package:flutter_boilerplate/models/user_model.dart';
 import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
+import 'package:flutter_boilerplate/shared_preferences/me.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          "Will be available soon!",
+                                          "Yakında Gelecek!",
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context)
                                               .textTheme
@@ -268,7 +269,8 @@ class _LoginPageState extends State<LoginPage> {
                                             color: Colors.amber)))),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                login();
+                                login(AuthenticateService()
+                                    .login(_email, _password));
                               }
                             },
                             child: Text(
@@ -296,14 +298,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // Function to login
-  void login() async {
+  void login(Future<UserModel> logInFuture) async {
     showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) {
         // handle the states of login process
         return FutureBuilder(
-            future: AuthenticateService().login(_email, _password),
+            future: logInFuture,
             builder: (context, AsyncSnapshot<UserModel> snap) {
               if (snap.hasData && snap.data!.succeeded!) {
                 // call the function to save the token to local memory if the user wants to stay signed in
@@ -315,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        "Succesfully loged in!",
+                        "Giriş Başarılı!",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headline6?.copyWith(
                               color: Colors.white,
@@ -350,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         1,
                       ),
-                      title: const Text("Login failed!"),
+                      title: const Text("Giriş Yapılamadı!"),
                       children: [
                         SizedBox(
                           height: 100,
@@ -362,7 +364,7 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: const Text("Ok"),
+                                child: const Text("Tamam"),
                               ),
                             ],
                           ),
@@ -373,7 +375,7 @@ class _LoginPageState extends State<LoginPage> {
                 );
               } else if (snap.hasError) {
                 return SimpleDialog(
-                  title: const Text("There is an issue with connection!"),
+                  title: const Text("Bağlantı Hatası!"),
                   children: [
                     Text("Error: ${snap.error.toString()}"),
                     ElevatedButton(

@@ -27,7 +27,6 @@ class UsersPageState extends State<UsersPage> {
       appBar: AppBar(
         centerTitle: true,
         title: SearchBar(searchTerms: searchTerms),
-        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: FutureBuilder<User>(
@@ -42,7 +41,6 @@ class UsersPageState extends State<UsersPage> {
                   searchTerms.add(
                       "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}");
                 }
-
                 if (snapshot.data!.data![index].financialAccountName != "") {
                   return Card(
                     color: Colors.white,
@@ -98,7 +96,7 @@ class UsersPageState extends State<UsersPage> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

@@ -20,10 +20,8 @@ class AllPetsPageState extends State<AllPetsPage> {
 
   static Map<String, String> token = {
     HttpHeaders.contentTypeHeader: 'application/json',
-    HttpHeaders.authorizationHeader:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiYzUzYjk3YjEtMDczNC00Nzg0LTlkYjMtNzcxYTE1ZmZiYjc4IiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTQ2NTI2MiwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.m3EXd2NP3JDQGX0fLcj_cijOiFuu3zl2fT1mum-VjI8'
+    HttpHeaders.authorizationHeader: 'Bearer '
   };
-  late List<String> searchTerms;
 
   @override
   void initState() {
@@ -45,10 +43,8 @@ class AllPetsPageState extends State<AllPetsPage> {
         title: SearchBar(
           searchTerms: searchTerms,
         ),
-        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      //drawer: const DrawerMenu(),
       body: FutureBuilder<PetsModel>(
         future: _futurePets,
         builder: (context, snapshot) {
@@ -61,7 +57,10 @@ class AllPetsPageState extends State<AllPetsPage> {
                     ? pic = snapshot.data!.data![index].petImage
                     : pic = "";
                 var photo = base64Decode(pic);
-                searchTerms.add(snapshot.data!.data![index].name.toString());
+                if (!searchTerms
+                    .contains(snapshot.data!.data![index].name.toString())) {
+                  searchTerms.add(snapshot.data!.data![index].name.toString());
+                }
                 return Card(
                   color: Colors.white,
                   elevation: 10,
@@ -99,7 +98,6 @@ class AllPetsPageState extends State<AllPetsPage> {
             return Text("${snapshot.error}");
           }
           return const Center(child: CircularProgressIndicator());
-
         },
       ),
     );
