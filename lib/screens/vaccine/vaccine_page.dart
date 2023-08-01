@@ -44,7 +44,6 @@ class _VaccinePageState extends State<VaccinePage> {
                           _vaccinesFuture = VaccineService().getVaccines();
                         }));
               },
-              child: const Text("Aşı Ekle"),
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue[800],
                 // padding:
@@ -55,6 +54,7 @@ class _VaccinePageState extends State<VaccinePage> {
                 ),
                 elevation: 2.0,
               ),
+
               elevation: 2.0,
             ),
 
@@ -78,6 +78,7 @@ class _VaccinePageState extends State<VaccinePage> {
                         title: ListTile(
                           //   child: ListTile(title: Text(child: Text("${snapshot.data!.data![index].isActive!}"))),
                           title: Text("${snapshot.data!.data![index].name}"),
+
                           subtitle:
                               Text(snapshot.data!.data![index].productName!),
                           trailing: IconButton(

@@ -170,13 +170,89 @@ class _DashboardState extends State<Dashboard> {
               child: SizedBox(
                   child: Row(
                 children: [
-                  Expanded(
+                  Container(
+                    width: 510,
+                    height: 300,
+                    decoration: cardDecoration2,
+                    child: Column(
+                      children: [
+                        // ignore: avoid_unnecessary_containers
+                        Container(
+                          child: const ListTile(
+                            leading: Icon(
+                              Icons.replay,
+                              color: Colors.black,
+                            ),
+                            title: Text("Geçmiş Randevular",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        const Divider(),
+                        DataTable(columns: const [
+                          DataColumn(
+                              label: Text(
+                            "Sahip Adı",
+                          )),
+                          DataColumn(
+                              label: Text(
+                            "Hasta Adı",
+                          )),
+                          DataColumn(
+                              label: Text(
+                            "Randevu Tarihi",
+                          )),
+                        ], rows: const [
+                          DataRow(
+                            cells: <DataCell>[
+                              DataCell(Text('Cansu Fidan',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('Paşa',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('19.03.2023',
+                                  style: TextStyle(color: Colors.black))),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              DataCell(Text('Çağlar Ferdi',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('Boncuk',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('19.03.2023',
+                                  style: TextStyle(color: Colors.black))),
+                            ],
+                          ),
+                          DataRow(
+                            cells: <DataCell>[
+                              DataCell(Text('Ali Veli',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('Kara',
+                                  style: TextStyle(color: Colors.black))),
+                              DataCell(Text('19.03.2023',
+                                  style: TextStyle(color: Colors.black))),
+                            ],
+                          ),
+                        ]),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Daha fazla göster",
+                            style: TextStyle(color: Colors.blue.shade900),
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(defaultPadding),
                     child: Container(
                       width: 510,
                       height: 300,
                       decoration: cardDecoration2,
                       child: Column(
                         children: [
+                          // ignore: avoid_unnecessary_containers
                           Container(
                             child: const ListTile(
                               leading: Icon(
@@ -330,155 +406,4 @@ class _DashboardState extends State<Dashboard> {
                 ],
               )),
             ),
-            // GridView.count(
-            //   crossAxisCount: 2,
-            //   shrinkWrap: true,
-            //   children: [
-            //     Padding(
-            //       padding: EdgeInsets.all(defaultPadding),
-            //       child: Card(
-            //         color: Colors.grey.shade200,
-            //         child: InkWell(
-            //           onTap: () {},
-            //           child: Column(
-            //             children: [
-            //               Container(
-            //                 color: Colors.blue.shade100,
-            //                 child: const ListTile(
-            //                   leading: Icon(
-            //                     Icons.replay,
-            //                     color: Colors.black,
-            //                   ),
-            //                   title: Text("Geçmiş Randevular",
-            //                       style: TextStyle(
-            //                           color: Colors.black,
-            //                           fontWeight: FontWeight.bold)),
-            //                 ),
-            //               ),
-            //               DataTable(columns: const [
-            //                 DataColumn(
-            //                     label: Text("Sahip Adı",
-            //                         style: TextStyle(color: Colors.blue))),
-            //                 DataColumn(
-            //                     label: Text("Hasta Adı",
-            //                         style: TextStyle(color: Colors.blue))),
-            //                 DataColumn(
-            //                     label: Text("Randevu Tarihi",
-            //                         style: TextStyle(color: Colors.blue))),
-            //               ], rows: const [
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Cansu Fidan',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Paşa',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('19.03.2023',
-            //                         style: TextStyle(color: Colors.black))),
-            //                   ],
-            //                 ),
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Çağlar Ferdi',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Boncuk',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('19.03.2023',
-            //                         style: TextStyle(color: Colors.black))),
-            //                   ],
-            //                 ),
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Ali Veli',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Kara',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('19.03.2023',
-            //                         style: TextStyle(color: Colors.black))),
-            //                   ],
-            //                 ),
-            //               ])
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //     Padding(
-            //       padding: EdgeInsets.all(defaultPadding),
-            //       child: Card(
-            //         color: Colors.grey.shade200,
-            //         child: InkWell(
-            //           onTap: () {},
-            //           child: Column(
-            //             children: [
-            //               Container(
-            //                 color: Colors.blue.shade100,
-            //                 child: const ListTile(
-            //                   leading: Icon(
-            //                     Icons.refresh_outlined,
-            //                     color: Colors.black,
-            //                   ),
-            //                   title: Text("Gelecek Randevular",
-            //                       style: TextStyle(
-            //                           color: Colors.black,
-            //                           fontWeight: FontWeight.bold)),
-            //                 ),
-            //               ),
-            //               DataTable(columns: const [
-            //                 DataColumn(
-            //                     label: Text("Sahip Adı",
-            //                         style: TextStyle(color: Colors.blue))),
-            //                 DataColumn(
-            //                     label: Text("Hasta Türü",
-            //                         style: TextStyle(color: Colors.blue))),
-            //                 DataColumn(
-            //                     label: Text("Randevu Tarihi",
-            //                         style: TextStyle(color: Colors.blue))),
-            //               ], rows: const [
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Cansu Fidan',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Paşa',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('19.03.2023',
-            //                         style: TextStyle(color: Colors.black))),
-            //                   ],
-            //                 ),
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Çağlar Ferdi',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Boncuk',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('19.03.2023',
-            //                         style: TextStyle(color: Colors.black))),
-            //                   ],
-            //                 ),
-            //                 DataRow(
-            //                   cells: <DataCell>[
-            //                     DataCell(Text('Ali Veli',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text('Kara',
-            //                         style: TextStyle(color: Colors.black))),
-            //                     DataCell(Text(
-            //                       '19.03.2023',
-            //                       style: TextStyle(color: Colors.black),
-            //                     )),
-            //                   ],
-            //                 ),
-            //               ])
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-          ],
-        ),
-      ),
-    );
-
-    // const SearchBar(),
-  }
-}
+            }
