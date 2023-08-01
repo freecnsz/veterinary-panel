@@ -16,22 +16,18 @@ class AllPetsPage extends StatefulWidget {
 class AllPetsPageState extends State<AllPetsPage> {
   late Future<PetsModel> _futurePets;
   late List<String> searchTerms;
-  late String tokenID;
-
-  static Map<String, String> token = {
-    HttpHeaders.contentTypeHeader: 'application/json',
-    HttpHeaders.authorizationHeader:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDUyNzA4Mzc4IiwianRpIjoiYzUzYjk3YjEtMDczNC00Nzg0LTlkYjMtNzcxYTE1ZmZiYjc4IiwiZW1haWwiOiJtZWhtZXRrbW9iaWxAZ21haWwuY29tIiwidWlkIjoiYWY3YzQ2MWQtMjhjNi00YjhhLWE2ZTAtMzhmYTllNjg5MjNkIiwiaXAiOiIxNzIuMzEuMzYuMTQ1Iiwicm9sZXMiOiJCYXNpYyIsImV4cCI6MTY5OTQ2NTI2MiwiaXNzIjoiQ29yZUlkZW50aXR5IiwiYXVkIjoiQ29yZUlkZW50aXR5VXNlciJ9.m3EXd2NP3JDQGX0fLcj_cijOiFuu3zl2fT1mum-VjI8'
-  };
-  late List<String> searchTerms;
 
   @override
   void initState() {
-    tokenID = "";
     _futurePets = PetService.getPets(token);
     searchTerms = [];
     super.initState();
   }
+
+  static Map<String, String> token = {
+    HttpHeaders.contentTypeHeader: 'application/json',
+    HttpHeaders.authorizationHeader: 'Bearer $token'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +95,6 @@ class AllPetsPageState extends State<AllPetsPage> {
             return Text("${snapshot.error}");
           }
           return const Center(child: CircularProgressIndicator());
-
         },
       ),
     );

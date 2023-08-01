@@ -195,6 +195,8 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             style: const TextStyle(color: Colors.black),
                             obscureText: passwordVisible,
+                            textInputAction: TextInputAction.go,
+                            onFieldSubmitted: (value) => login(),
                             decoration: InputDecoration(
                               focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.amber)),
