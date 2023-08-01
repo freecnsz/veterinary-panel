@@ -4,15 +4,14 @@ import 'package:flutter_boilerplate/models/user_model.dart';
 import 'package:flutter_boilerplate/services/product_service/authentication_service.dart';
 import 'package:flutter_boilerplate/shared_preferences/shared_preferences.dart';
 
-
 class LoginPage extends StatefulWidget {
-   const LoginPage({super.key});
+  const LoginPage({super.key});
 
-   @override
-   // ignore: library_private_types_in_public_api
-   _LoginPageState createState() => _LoginPageState();
-   static const String routeName = '/';
- }
+  @override
+  // ignore: library_private_types_in_public_api
+  _LoginPageState createState() => _LoginPageState();
+  static const String routeName = '/';
+}
 
 class _LoginPageState extends State<LoginPage> {
   String _email = '';
@@ -20,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool passwordVisible = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -312,7 +310,6 @@ class _LoginPageState extends State<LoginPage> {
                 if (rememberMe) {
                   SPService().saveToken(snap.data!.user!.jwToken!);
                 }
-
 
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   ScaffoldMessenger.of(context).showSnackBar(
