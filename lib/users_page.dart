@@ -36,8 +36,11 @@ class UsersPageState extends State<UsersPage> {
             return ListView.builder(
               itemCount: snapshot.data!.data!.length,
               itemBuilder: (context, index) {
-                searchTerms.add(
-                    "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}");
+                if (!searchTerms.contains(
+                    "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}")) {
+                  searchTerms.add(
+                      "${snapshot.data!.data![index].financialAccountUserName} ${snapshot.data!.data![index].financialAccountUserLastName}");
+                }
 
                 if (snapshot.data!.data![index].financialAccountName != "") {
                   return Card(
